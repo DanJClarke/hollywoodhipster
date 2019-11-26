@@ -12,7 +12,7 @@ try {
     require('foundation-sites');
 } catch (e) {}
 
-$(document).foundation(); // initialize foundation
+// $(document).foundation(); // initialize foundation
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
