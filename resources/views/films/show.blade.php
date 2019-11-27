@@ -11,10 +11,15 @@
             <br/>
             <br/>
             <img src="{{ $film->imgsrc }}" alt="{{ $film->title }} poster" />
-            <p>Running time: {{  $film->running_time }}</p>
-            <p>Release date:{{  $film->release_date }}</p>
-            <p>Budget: {{ $film->budget  }}</p>
-            <p>Plot: {{ $film->plot  }}</p>
+            <p>Running time: {{  $film->running_time }} </p>
+            <p>Release date: {{  $film->release_date }} </p>
+            <p>Budget: {{ $film->budget  }} </p>
+            <p>Plot: {{ $film->plot  }} </p>
+            <p>Genre:
+            @foreach ($film->genre as $genre)
+                <span> {{ $genre->name }} </span>
+            @endforeach
+            </p>
         </div>
     </div>
 
@@ -27,7 +32,6 @@
                     @method('DELETE')
                     @csrf
                     {{ $review->content }}
-                    <input type="hidden" value={{ $review->film_id }} name="film_id"/>
                     <button class="button alert inline" type="submit">Remove Review</button>
                 </label>
                 </form>

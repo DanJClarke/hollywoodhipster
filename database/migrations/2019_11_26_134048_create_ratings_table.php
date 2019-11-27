@@ -19,6 +19,8 @@ class CreateRatingsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('film_id');
             $table->timestamps();
+
+            $table->unique(['film_id', 'user_id']);
         });
     }
 
