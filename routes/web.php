@@ -15,6 +15,8 @@ Route::get('/', 'PagesController@home');
 
 Route::get('/foundation-test', 'PagesController@foundation');
 
+Route::delete('/reviews/{review}', 'FilmReviewsController@destroy');
+
 Route::resource('/films', 'FilmsController');
 
 Auth::routes();

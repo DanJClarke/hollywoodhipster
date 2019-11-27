@@ -7,7 +7,9 @@
     <div class="row">
         <div class="large-12 columns">
             <h1>{{ $film->title }}</h1>
-
+            <a href="/films/{{ $film->id }}/edit">edit</a>
+            <br/>
+            <br/>
             <img src="{{ $film->imgsrc }}" alt="{{ $film->title }} poster" />
             <p>Running time: {{  $film->running_time }}</p>
             <p>Release date:{{  $film->release_date }}</p>
@@ -15,10 +17,23 @@
             <p>Plot: {{ $film->plot  }}</p>
         </div>
     </div>
-    <div class="row">
-        <div class="large-12 columns">
-            <a href="/films/{{ $film->id }}/edit">edit</a>
-        </div>
-    </div>
 
+    @if($film->reviews->count())
+    <div class="row">
+        <h3>Reviews</h3>
+        <div>
+            @foreach ($film->reviews as $review)
+                <form method="POST" action="/reviews/{{ $review->id }}">
+                    @method('DELETE')
+                    @csrf
+                    {{ $review->content }}
+                    <input type="hidden" value={{ $review->film_id }} name="film_id"/>
+                    <button class="button alert inline" type="submit">Remove Review</button>
+                </label>
+                </form>
+            @endforeach
+
+        <div>
+    </div>
+    @endif
 @endsection

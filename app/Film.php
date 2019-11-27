@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Review;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Film extends Model
@@ -14,4 +16,10 @@ class Film extends Model
         'budget',
         'plot'
     ];
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
+
+
 }
