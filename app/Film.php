@@ -21,5 +21,11 @@ class Film extends Model
         return $this->hasMany(Review::class);
     }
 
+    public function genre(){
+        return $this->belongsToMany(Genre::class);
+    }
 
+    public function director(){
+        return $this->belongsTo(Director::class);
+    }
 }
