@@ -8,12 +8,9 @@ use App\Review;
 
 class FilmReviewsController extends Controller
 {
-    public function destroy($id)
+    public function destroy(Review $review)
     {
-       Review::find($id)->delete();
-
-       $film_id = request('film_id');
-
-       return redirect('/films/'. $film_id);
+       $review->delete();
+       return back();
     }
 }
