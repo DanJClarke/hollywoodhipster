@@ -16,37 +16,37 @@
         <div class="row">
             <div class="large-4 columns">
                 <label>Film Title
-                    <input type="text" name="title" placeholder="Add a title" value={{ $film->title }} />
+                    <input type="text" name="title" placeholder="Add a title" value={{ $film->title }} required />
                 </label>
             </div>
         </div>
         <div class="row">
             <div class="large-3 columns">
                 <label>Film image
-                    <input type="text" name="imgsrc" placeholder="please add a path"  value={{ $film->imgsrc }} />
+                    <input type="text" name="imgsrc" placeholder="please add a path"  value={{ $film->imgsrc }} required/>
                 </label>
             </div>
             <div class="large-3 columns">
                 <label>Running time (mins)
-                    <input type="text" name="running_time" placeholder="please add a running time" value={{ $film->running_time }} />
+                    <input type="text" name="running_time" placeholder="please add a running time" value={{ $film->running_time }} required/>
                 </label>
             </div>
             <div class="large-3 columns">
                 <label>Release date
-                    <input type="date" name="release_date" placeholder="please add a release date" value={{ $film->release_date }} />
+                    <input type="date" name="release_date" placeholder="please add a release date" value={{ $film->release_date }} required/>
                 </label>
             </div>
 
             <div class="large-3 columns">
                 <label>Budget
-                    <input type="text" name="budget" placeholder="please add a budget in numbers" value={{ $film->budget }} />
+                    <input type="text" name="budget" placeholder="please add a budget in numbers" value={{ $film->budget }} required/>
                 </label>
             </div>
         </div>
         <div class="row">
             <div class="large-12 columns">
                 <label>Film Plot
-                    <textarea name="plot" rows="10" placeholder="Please keep the plot synopsis brief">{{ $film->plot }}</textarea>
+                    <textarea name="plot" rows="10" placeholder="Please keep the plot synopsis brief" required>{{ $film->plot }}</textarea>
                 </label>
             </div>
         </div>
@@ -67,5 +67,6 @@
         </div>
     </form>
 
+    @include('errors')
 
 @endsection

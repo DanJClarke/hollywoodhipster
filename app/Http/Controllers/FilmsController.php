@@ -38,13 +38,13 @@ class FilmsController extends Controller
      */
     public function store(Request $request)
     {
-        Film::create(request([
-            'title',
-            'imgsrc',
-            'running_time',
-            'release_date',
-            'budget',
-            'plot'
+        Film::create(request()->validate([
+            'title' => ['required'],
+            'imgsrc' => ['required'],
+            'running_time' => ['required'],
+            'release_date' => ['required'],
+            'budget' => ['required'],
+            'plot' => ['required'],
         ]));
 
         return redirect('/films');
@@ -81,13 +81,13 @@ class FilmsController extends Controller
      */
     public function update(Request $request, Film $film)
     {
-        $film->update(request([
-            'title',
-            'imgsrc',
-            'running_time',
-            'release_date',
-            'budget',
-            'plot'
+        $film->update(request()->validate([
+            'title' => ['required'],
+            'imgsrc' => ['required'],
+            'running_time' => ['required'],
+            'release_date' => ['required'],
+            'budget' => ['required'],
+            'plot' => ['required'],
         ]));
 
         return redirect('/films');
