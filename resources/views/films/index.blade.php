@@ -10,7 +10,7 @@
     <div>
         <ul>
         @foreach($films as $film)
-            <li>{{ $film->title }}</li>
+            <li><a href="/films/{{ $film->id }}">{{ $film->title }}</a></li>
         @endforeach
         <ul>
 

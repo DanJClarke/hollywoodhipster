@@ -38,18 +38,16 @@ class FilmsController extends Controller
      */
     public function store(Request $request)
     {
-        $film = new Film();
+        Film::create(request([
+            'title',
+            'imgsrc',
+            'running_time',
+            'release_date',
+            'budget',
+            'plot'
+        ]));
 
-        $film->title = request('title');
-        $film->imgsrc = request('title');
-        $film->running_time = request('running_time');
-        $film->release_date = request('release_date');
-        $film->budget = request('budget');
-        $film->plot = request('plot');
-
-        $film->save();
-
-         return redirect('/films');
+        return redirect('/films');
     }
 
     /**
@@ -60,7 +58,7 @@ class FilmsController extends Controller
      */
     public function show(Film $film)
     {
-        //
+        return view('films.show', compact('film'));
     }
 
     /**
@@ -71,7 +69,7 @@ class FilmsController extends Controller
      */
     public function edit(Film $film)
     {
-        //
+        return view('films.edit', compact('film'));
     }
 
     /**
@@ -83,7 +81,17 @@ class FilmsController extends Controller
      */
     public function update(Request $request, Film $film)
     {
-        //
+        $film->update(request([
+            'title',
+            'imgsrc',
+            'running_time',
+            'release_date',
+            'budget',
+            'plot'
+        ]));
+
+        return redirect('/films');
+
     }
 
     /**
@@ -94,6 +102,8 @@ class FilmsController extends Controller
      */
     public function destroy(Film $film)
     {
-        //
+       $film->delete();
+
+       return redirect('/films');
     }
 }

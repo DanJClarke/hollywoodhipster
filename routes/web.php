@@ -15,9 +15,7 @@ Route::get('/', 'PagesController@home');
 
 Route::get('/foundation-test', 'PagesController@foundation');
 
-Route::get('/films', 'FilmsController@index');
-Route::post('/films', 'FilmsController@store');
-Route::get('/films/create', 'FilmsController@create');
+Route::resource('/films', 'FilmsController');
 
 Auth::routes();
 
