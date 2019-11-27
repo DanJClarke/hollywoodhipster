@@ -17,9 +17,9 @@ class CreateFilmsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('imgsrc');
-            $table->time('runnnig_time');
+            $table->integer('running_time');
             $table->date('release_date');
-            $table->float('budget');
+            $table->integer('budget');
             $table->text('plot');
             $table->timestamps();
         });

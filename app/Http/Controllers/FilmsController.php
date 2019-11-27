@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Film;
 use Illuminate\Http\Request;
 
-class FilmController extends Controller
+class FilmsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,10 @@ class FilmController extends Controller
      */
     public function index()
     {
-        //
+       $films = Film::all();
+
+      // return $films;
+       return view('films.index', compact('films'));
     }
 
     /**
@@ -24,7 +27,7 @@ class FilmController extends Controller
      */
     public function create()
     {
-        //
+        return view('films.create');
     }
 
     /**
@@ -35,7 +38,18 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $film = new Film();
+
+        $film->title = request('title');
+        $film->imgsrc = request('title');
+        $film->running_time = request('running_time');
+        $film->release_date = request('release_date');
+        $film->budget = request('budget');
+        $film->plot = request('plot');
+
+        $film->save();
+
+         return redirect('/films');
     }
 
     /**
