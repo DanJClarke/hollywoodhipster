@@ -16,7 +16,7 @@
         <div class="row">
             <div class="large-4 columns">
                 <label>Name
-                    <input type="text" name="name" placeholder="Add a name" value={{ $director->name }} required />
+                    <input type="text" name="name" placeholder="Add a name" value="{{ $director->name }}" required />
                 </label>
             </div>
         </div>

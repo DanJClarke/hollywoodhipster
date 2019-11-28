@@ -23,7 +23,7 @@ class Film extends Model
     }
 
     public function genres(){
-        return $this->belongsToMany(Genre::class);
+        return $this->belongsToMany(Genre::class)->withTimestamps();
     }
 
     public function director(){

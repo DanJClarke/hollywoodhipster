@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Film;
 use App\Director;
 use App\Genre;
+use App\Filmgenre;
 use Illuminate\Http\Request;
 
 class FilmsController extends Controller
@@ -47,7 +48,8 @@ class FilmsController extends Controller
      */
     public function store(Request $request)
     {
-        Film::create(request()->validate([
+
+        $film = Film::create(request()->validate([
             'title' => ['required'],
             'director_id' => ['required'],
             'imgsrc' => ['required'],
@@ -56,6 +58,8 @@ class FilmsController extends Controller
             'budget' => ['required'],
             'plot' => ['required'],
         ]));
+
+        $film->genres()->sync(request('genres'));
 
         return redirect('/films');
     }
@@ -79,6 +83,7 @@ class FilmsController extends Controller
      */
     public function edit(Film $film)
     {
+
         return view('films.edit')
             ->withFilm($film)
             ->withAllDirectors(Director::all())
@@ -94,6 +99,11 @@ class FilmsController extends Controller
      */
     public function update(Request $request, Film $film)
     {
+
+       // dd(request('genres'));
+
+
+
         $film->update(request()->validate([
             'title' => ['required'],
             'director_id' => ['required'],
@@ -103,6 +113,8 @@ class FilmsController extends Controller
             'budget' => ['required'],
             'plot' => ['required'],
         ]));
+
+        $film->genres()->sync(request('genres'));
 
         return redirect('/films');
 
