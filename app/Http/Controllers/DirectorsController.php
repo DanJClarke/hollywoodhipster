@@ -49,7 +49,17 @@ class DirectorsController extends Controller
      */
     public function show(Director $director)
     {
-        return view('directors.show', compact('director'));
+        $genres = [];
+
+        $director->films->each(function($film) use (&$genres) {
+            $film->genres->each(function($genre) use (&$genres) {
+                $genres[] = $genre;
+            });
+        });
+
+        return view('directors.show')
+            ->withDirector($director)
+            ->withDirectorsGenres($genres);
     }
 
     /**
@@ -61,7 +71,7 @@ class DirectorsController extends Controller
     public function edit(Director $director)
     {
         return view('directors.edit')
-            ->withFilm($director)
+            ->withDirector($director)
             ->withAllFilms(Film::all())
             ->withAllGenres(Genre::all());
     }

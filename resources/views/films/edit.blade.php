@@ -65,7 +65,7 @@
             <label>Film Genres</label>
             @foreach($allGenres as $genre)
                 <input id="genre{{ $genre->id }}" name="genres[]" type="checkbox" value="{{ $genre->id }}"
-                    @foreach($film->genre as  $film_genre)
+                    @foreach($film->genres as  $film_genre)
                         {{ $genre->id == $film_genre->id ? 'checked' : '' }}
                     @endforeach
                 ><label for="genre{{ $genre->id }}">{{ $genre->name }}</label>

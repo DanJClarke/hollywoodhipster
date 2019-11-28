@@ -13,9 +13,16 @@
             <p>Bio: <br/>{{ $director->bio }}</p>
             <p>Films:</p>
             <ul>
-            @foreach($director->film as $film)
+            @foreach($director->films as $film)
                 <li><a href="/films/{{ $film->id }}">{{ $film->title }}</a></li>
             @endforeach
+            </ul>
+
+            <p>Genres they are known for:</p>
+            <ul>
+                @foreach($directorsGenres as $genre)
+                    <li>{{ $genre->name }}</li>
+                @endforeach
             </ul>
         </div>
     </div>

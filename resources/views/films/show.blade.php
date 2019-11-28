@@ -18,7 +18,7 @@
             <p>Budget: {{ $film->budget  }} </p>
             <p>Plot: {{ $film->plot  }} </p>
             <p>Genre:
-            @foreach ($film->genre as $genre)
+            @foreach ($film->genres as $genre)
                 <span> {{ $genre->name }} </span>
             @endforeach
             </p>

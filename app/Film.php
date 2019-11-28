@@ -22,7 +22,7 @@ class Film extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function genre(){
+    public function genres(){
         return $this->belongsToMany(Genre::class);
     }
 

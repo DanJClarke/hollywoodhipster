@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Director extends Model
 {
-    public function film(){
+    public function films()
+    {
         return $this->hasMany(Film::class);
     }
+
+
 }
