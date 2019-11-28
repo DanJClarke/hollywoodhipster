@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Edit film details')
+@section('title', 'Director Details')
 
 @section('content')
 

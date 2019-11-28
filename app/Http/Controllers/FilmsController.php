@@ -17,11 +17,12 @@ class FilmsController extends Controller
      */
     public function index()
     {
-      // return $films;
+
        return view('films.index')
        ->withAllFilms(Film::all())
        ->withAllDirectors(Director::all())
        ->withAllGenres(Genre::all());
+
     }
 
     /**
@@ -31,13 +32,11 @@ class FilmsController extends Controller
      */
     public function create()
     {
-        //$directors = Director::all();
-        // $genre = Genre::all();
-        // return view('films.create', compact('directors'), compact('genre'));
 
         return view('films.create')
             ->withAllDirectors(Director::all())
             ->withAllGenres(Genre::all());
+
     }
 
     /**
@@ -88,6 +87,7 @@ class FilmsController extends Controller
             ->withFilm($film)
             ->withAllDirectors(Director::all())
             ->withAllGenres(Genre::all());
+
     }
 
     /**
@@ -99,10 +99,6 @@ class FilmsController extends Controller
      */
     public function update(Request $request, Film $film)
     {
-
-       // dd(request('genres'));
-
-
 
         $film->update(request()->validate([
             'title' => ['required'],
@@ -129,6 +125,7 @@ class FilmsController extends Controller
     public function destroy(Film $film)
     {
        $film->delete();
+       $film->genres()->sync(request('genres'));
 
        return redirect('/films');
     }

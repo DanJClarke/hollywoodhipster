@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Edit film details')
+@section('title', 'Edit Film details')
 
 @section('content')
 
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="large-4 columns">
                 <label>Film Title
-                    <input type="text" name="title" placeholder="Add a title" value={{ $film->title }} required />
+                    <input type="text" name="title" placeholder="Add a title" value="{{ $film->title }}" required />
                 </label>
             </div>
         </div>
@@ -61,15 +61,19 @@
                 </label>
             </div>
         </div>
-        <div class="large-6 columns">
-            <label>Film Genres</label>
-            @foreach($allGenres as $genre)
-                <input id="genre{{ $genre->id }}" name="genres[]" type="checkbox" value="{{ $genre->id }}"
-                    @foreach($film->genres as  $film_genre)
-                        {{ $genre->id == $film_genre->id ? 'checked' : '' }}
-                    @endforeach
-                ><label for="genre{{ $genre->id }}">{{ $genre->name }}</label>
-            @endforeach
+        <div class="row">
+            <div class="large-6 columns">
+                <label>Film Genres</label>
+                @foreach($allGenres as $genre)
+                    <span class="genre">
+                        <input id="genre{{ $genre->id }}" name="genres[]" type="checkbox" value="{{ $genre->id }}"
+                            @foreach($film->genres as  $film_genre)
+                                {{ $genre->id == $film_genre->id ? 'checked' : '' }}
+                            @endforeach
+                        ><label for="genre{{ $genre->id }}">{{ $genre->name }}</label>
+                    </span>
+                @endforeach
+            </div>
         </div>
         <div class="row">
             <div class="large-12 columns">

@@ -17,7 +17,10 @@ class DirectorsController extends Controller
      */
     public function index()
     {
-        //
+        return view('directors.index')
+        ->withAllFilms(Film::all())
+        ->withAllDirectors(Director::all())
+        ->withAllGenres(Genre::all());
     }
 
     /**
@@ -27,7 +30,7 @@ class DirectorsController extends Controller
      */
     public function create()
     {
-        //
+        return view('directors.create');
     }
 
     /**
@@ -38,7 +41,12 @@ class DirectorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Director::create(request()->validate([
+            'name' => ['required'],
+            'bio' => ['required']
+        ]));
+
+        return redirect('/directors');
     }
 
     /**
@@ -83,9 +91,14 @@ class DirectorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Director $director)
     {
-        //
+        $director->update(request()->validate([
+            'name' => ['required'],
+            'bio' => ['required'],
+        ]));
+
+        return redirect('/directors');
     }
 
     /**
