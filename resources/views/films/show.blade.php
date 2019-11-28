@@ -41,5 +41,10 @@
 
         <div>
     </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <a href="/films">&laquo; Back to all films</a>
+        </div>
+    </div>
     @endif
 @endsection

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Film;
 use App\Director;
 use App\Genre;
-use App\Filmgenre;
 use Illuminate\Http\Request;
 
 class FilmsController extends Controller
@@ -17,12 +16,10 @@ class FilmsController extends Controller
      */
     public function index()
     {
-
        return view('films.index')
        ->withAllFilms(Film::all())
        ->withAllDirectors(Director::all())
        ->withAllGenres(Genre::all());
-
     }
 
     /**

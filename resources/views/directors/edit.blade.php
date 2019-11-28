@@ -36,5 +36,10 @@
     </form>
 
     @include('errors')
+    <div class="row">
+        <div class="large-12 columns">
+            <a href="/directors">&laquo; Back to all Directors</a>
+        </div>
+    </div>
 
 @endsection

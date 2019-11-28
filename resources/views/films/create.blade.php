@@ -79,5 +79,10 @@
     </form>
 
     @include('errors')
+    <div class="row">
+        <div class="large-12 columns">
+            <a href="/films">&laquo; Back to all Films</a>
+        </div>
+    </div>
 
 @endsection

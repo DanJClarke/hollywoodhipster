@@ -26,4 +26,9 @@
             </ul>
         </div>
     </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <a href="/directors">&laquo; Back to all directors</a>
+        </div>
+    </div>
 @endsection
