@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Film;
+use App\Director;
 use Illuminate\Http\Request;
 
 class FilmsController extends Controller
@@ -27,7 +28,8 @@ class FilmsController extends Controller
      */
     public function create()
     {
-        return view('films.create');
+        $directors = Director::all();
+        return view('films.create', compact('directors'));
     }
 
     /**
@@ -40,6 +42,7 @@ class FilmsController extends Controller
     {
         Film::create(request()->validate([
             'title' => ['required'],
+            'director_id' => ['required'],
             'imgsrc' => ['required'],
             'running_time' => ['required'],
             'release_date' => ['required'],
@@ -69,7 +72,8 @@ class FilmsController extends Controller
      */
     public function edit(Film $film)
     {
-        return view('films.edit', compact('film'));
+        $directors = Director::all();
+        return view('films.edit', compact('film'), compact('directors'));
     }
 
     /**
@@ -83,6 +87,7 @@ class FilmsController extends Controller
     {
         $film->update(request()->validate([
             'title' => ['required'],
+            'director_id' => ['required'],
             'imgsrc' => ['required'],
             'running_time' => ['required'],
             'release_date' => ['required'],

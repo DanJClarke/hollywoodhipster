@@ -10,6 +10,7 @@ class Film extends Model
 {
     protected $fillable  = [
         'title',
+        'director_id',
         'imgsrc',
         'running_time',
         'release_date',

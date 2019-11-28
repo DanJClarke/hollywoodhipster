@@ -21,6 +21,17 @@
             </div>
         </div>
         <div class="row">
+            <div class="large-12 columns">
+                <label>Director
+                    <select name="director_id" required>
+                        @foreach($directors as  $director)
+                            <option value="{{ $director->id }}">{{ $director->name }}</option>
+                        @endforeach
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="row">
             <div class="large-3 columns">
                 <label>Film image
                     <input type="text" {{ $errors->has('imgsrc')  ? "class='warning'" : "" }} name="imgsrc"  placeholder="please add a path" value="{{ old('imgsrc') }}" required />
