@@ -19,6 +19,8 @@ Route::delete('/reviews/{review}', 'FilmReviewsController@destroy');
 
 Route::resource('/films', 'FilmsController');
 
+Route::resource('/directors', 'DirectorsController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -6,6 +6,11 @@
         <title> @yield('title', 'Hollywood Hipster | The hipest movie reviews this side of the west coast ')</title>
 
         <link rel="stylesheet" href="/css/app.css">
+        <style>
+            .genre{
+                display: inline-block;
+            }
+        </style>
     </head>
     <body>
         @yield('content')

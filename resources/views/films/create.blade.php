@@ -24,7 +24,7 @@
             <div class="large-12 columns">
                 <label>Director
                     <select name="director_id" required>
-                        @foreach($directors as  $director)
+                        @foreach($allDirectors as  $director)
                             <option value="{{ $director->id }}">{{ $director->name }}</option>
                         @endforeach
                     </select>
@@ -59,6 +59,16 @@
                 <label>Film Plot
                     <textarea name="plot" rows="10" {{ $errors->has('budget') ? "class='warning'" : "" }} placeholder="Please keep the plot synopsis brief"  required />{{ old('plot') }}</textarea>
                 </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-6 columns">
+                <label>Film Genres</label>
+                @foreach($allGenres as  $genre)
+                    <span class="genre">
+                        <input id="genre{{ $genre->id }}" name="genres[]" type="checkbox" value="{{ $genre->id }}"><label for="genre{{ $genre->id }}">{{ $genre->name }}</label>
+                    </span>
+                @endforeach
             </div>
         </div>
         <div class="row">

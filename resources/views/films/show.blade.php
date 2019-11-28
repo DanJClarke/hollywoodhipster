@@ -10,7 +10,8 @@
             <a href="/films/{{ $film->id }}/edit">edit</a>
             <br/>
             <br/>
-            <p>Directed by: {{ $film->director->name }}</p>
+            <p>Directed by:
+            <a href="/directors/{{ $film->director->id }}">{{ $film->director->name }}</a>
             <img src="{{ $film->imgsrc }}" alt="{{ $film->title }} poster" />
             <p>Running time: {{  $film->running_time }} </p>
             <p>Release date: {{  $film->release_date }} </p>

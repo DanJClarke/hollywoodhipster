@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Film;
 use App\Director;
+use App\Genre;
 use Illuminate\Http\Request;
 
 class FilmsController extends Controller
@@ -15,10 +16,11 @@ class FilmsController extends Controller
      */
     public function index()
     {
-       $films = Film::all();
-
       // return $films;
-       return view('films.index', compact('films'));
+       return view('films.index')
+       ->withAllFilms(Film::all())
+       ->withAllDirectors(Director::all())
+       ->withAllGenres(Genre::all());
     }
 
     /**
@@ -28,8 +30,13 @@ class FilmsController extends Controller
      */
     public function create()
     {
-        $directors = Director::all();
-        return view('films.create', compact('directors'));
+        //$directors = Director::all();
+        // $genre = Genre::all();
+        // return view('films.create', compact('directors'), compact('genre'));
+
+        return view('films.create')
+            ->withAllDirectors(Director::all())
+            ->withAllGenres(Genre::all());
     }
 
     /**
@@ -72,8 +79,10 @@ class FilmsController extends Controller
      */
     public function edit(Film $film)
     {
-        $directors = Director::all();
-        return view('films.edit', compact('film'), compact('directors'));
+        return view('films.edit')
+            ->withFilm($film)
+            ->withAllDirectors(Director::all())
+            ->withAllGenres(Genre::all());
     }
 
     /**
