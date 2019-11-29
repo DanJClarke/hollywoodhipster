@@ -17,7 +17,12 @@ Route::get('/foundation-test', 'PagesController@foundation');
 
 Route::delete('/reviews/{review}', 'FilmReviewsController@destroy');
 
-Route::resource('/films', 'FilmsController');
+    Route::resource('/films', 'FilmsController');
+
+
+
+        Route::resource('/films', 'FilmsController')->middleware('can:manage-users');
+
 
 Route::resource('/directors', 'DirectorsController');
 
