@@ -104,7 +104,7 @@ class FilmsController extends Controller
             'running_time' => ['required'],
             'release_date' => ['required'],
             'budget' => ['required'],
-            'plot' => ['required'],
+            'plot' => ['required']
         ]));
 
         $film->genres()->sync(request('genres'));

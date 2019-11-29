@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
 
+    protected $fillable  = [
+        'name',
+        'email'
+    ];
 
     public function __construct(){
 
@@ -58,6 +62,10 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
+        $user->update(request()->validate([
+            'name' => ['required'],
+            'email' => ['required']
+        ]));
         return redirect()->route('admin.users.index');
     }
 
