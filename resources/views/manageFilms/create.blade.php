@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <form method="post" action="/films">
+    <form method="post" action="/manage-films">
         @csrf
         <div class="row">
             <div class="large-4 columns">
@@ -81,7 +81,7 @@
     @include('errors')
     <div class="row">
         <div class="large-12 columns">
-            <a href="/films">&laquo; Back to all Films</a>
+            <a href="/manage-films">&laquo; Back to all Films</a>
         </div>
     </div>
 

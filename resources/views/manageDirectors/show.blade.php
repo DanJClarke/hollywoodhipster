@@ -7,7 +7,7 @@
     <div class="row">
         <div class="large-12 columns">
             <h1>{{ $director->name }}</h1>
-            <a href="/directors/{{ $director->id }}/edit">edit</a>
+            <a href="/manage-directors/{{ $director->id }}/edit">edit</a>
             <br/>
             <br/>
             <p>Bio: <br/>{{ $director->bio }}</p>
@@ -28,7 +28,7 @@
     </div>
     <div class="row">
         <div class="large-12 columns">
-            <a href="/directors">&laquo; Back to all directors</a>
+            <a href="/manage-directors">&laquo; Back to all directors</a>
         </div>
     </div>
 @endsection

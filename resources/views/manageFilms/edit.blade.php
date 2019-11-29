@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <form method="post" action="/films/{{ $film->id }}">
+    <form method="post" action="/manage-films/{{ $film->id }}">
         @method('PATCH')
         @csrf
         <div class="row">
@@ -80,7 +80,7 @@
         </div>
     </form>
 
-    <form method="post" action="/films/{{ $film->id }}">
+    <form method="post" action="/manage-films/{{ $film->id }}">
         @method('DELETE')
         @csrf
         <div class="row">
@@ -94,7 +94,7 @@
 
     <div class="row">
         <div class="large-12 columns">
-            <a href="/films">&laquo; Back to all Films</a>
+            <a href="/manage-films">&laquo; Back to all Films</a>
         </div>
     </div>
 

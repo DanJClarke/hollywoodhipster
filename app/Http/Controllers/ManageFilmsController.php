@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Film;
 use App\Director;
 use App\Genre;
+use Gate;
 use Illuminate\Http\Request;
 
-class FilmsController extends Controller
+class ManageFilmsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,11 @@ class FilmsController extends Controller
      */
     public function index()
     {
-       return view('films.index')
+        if(Gate::denies('users')){
+            return redirect()->route('home');
+        }
+
+       return view('ManageFilms.index')
        ->withAllFilms(Film::all())
        ->withAllDirectors(Director::all())
        ->withAllGenres(Genre::all());
@@ -29,8 +34,11 @@ class FilmsController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
 
-        return view('films.create')
+        return view('ManageFilms.create')
             ->withAllDirectors(Director::all())
             ->withAllGenres(Genre::all());
 
@@ -44,6 +52,9 @@ class FilmsController extends Controller
      */
     public function store(Request $request)
     {
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
 
         $film = Film::create(request()->validate([
             'title' => ['required'],
@@ -57,7 +68,7 @@ class FilmsController extends Controller
 
         $film->genres()->sync(request('genres'));
 
-        return redirect('/films');
+        return redirect('/manage-films');
     }
 
     /**
@@ -68,7 +79,11 @@ class FilmsController extends Controller
      */
     public function show(Film $film)
     {
-        return view('films.show', compact('film'));
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
+
+        return view('ManageFilms.show', compact('film'));
     }
 
     /**
@@ -79,8 +94,11 @@ class FilmsController extends Controller
      */
     public function edit(Film $film)
     {
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
 
-        return view('films.edit')
+        return view('ManageFilms.edit')
             ->withFilm($film)
             ->withAllDirectors(Director::all())
             ->withAllGenres(Genre::all());
@@ -96,6 +114,9 @@ class FilmsController extends Controller
      */
     public function update(Request $request, Film $film)
     {
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
 
         $film->update(request()->validate([
             'title' => ['required'],
@@ -109,7 +130,7 @@ class FilmsController extends Controller
 
         $film->genres()->sync(request('genres'));
 
-        return redirect('/films');
+        return redirect('/manage-films');
 
     }
 
@@ -121,9 +142,13 @@ class FilmsController extends Controller
      */
     public function destroy(Film $film)
     {
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
+
        $film->delete();
        $film->genres()->sync(request('genres'));
 
-       return redirect('/films');
+       return redirect('/manage-films');
     }
 }

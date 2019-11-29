@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <form method="post" action="/directors">
+    <form method="post" action="/manage-directors">
 
         @csrf
         <div class="row">
@@ -39,7 +39,7 @@
 
     <div class="row">
         <div class="large-12 columns">
-            <a href="/directors">&laquo; Back to all Directors</a>
+            <a href="/manage-directors">&laquo; Back to all Directors</a>
         </div>
     </div>
 

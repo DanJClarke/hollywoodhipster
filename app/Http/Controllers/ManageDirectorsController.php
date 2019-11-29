@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Film;
 use App\Director;
 use App\Genre;
+use Gate;
 
 use Illuminate\Http\Request;
 
-class DirectorsController extends Controller
+class ManageDirectorsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +18,11 @@ class DirectorsController extends Controller
      */
     public function index()
     {
-        return view('directors.index')
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
+
+        return view('manageDirectors.index')
         ->withAllFilms(Film::all())
         ->withAllDirectors(Director::all())
         ->withAllGenres(Genre::all());
@@ -30,7 +35,11 @@ class DirectorsController extends Controller
      */
     public function create()
     {
-        return view('directors.create');
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
+
+        return view('manageDirectors.create');
     }
 
     /**
@@ -41,12 +50,16 @@ class DirectorsController extends Controller
      */
     public function store(Request $request)
     {
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
+
         Director::create(request()->validate([
             'name' => ['required'],
             'bio' => ['required']
         ]));
 
-        return redirect('/directors');
+        return redirect('/manage-directors');
     }
 
     /**
@@ -57,6 +70,10 @@ class DirectorsController extends Controller
      */
     public function show(Director $director)
     {
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
+
         $genres = [];
 
         $director->films->each(function($film) use (&$genres) {
@@ -65,7 +82,7 @@ class DirectorsController extends Controller
             });
         });
 
-        return view('directors.show')
+        return view('manageDirectors.show')
             ->withDirector($director)
             ->withDirectorsGenres($genres);
     }
@@ -78,7 +95,11 @@ class DirectorsController extends Controller
      */
     public function edit(Director $director)
     {
-        return view('directors.edit')
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
+
+        return view('manageDirectors.edit')
             ->withDirector($director)
             ->withAllFilms(Film::all())
             ->withAllGenres(Genre::all());
@@ -93,12 +114,16 @@ class DirectorsController extends Controller
      */
     public function update(Request $request, Director $director)
     {
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
+
         $director->update(request()->validate([
             'name' => ['required'],
             'bio' => ['required'],
         ]));
 
-        return redirect('/directors');
+        return redirect('/manage-directors');
     }
 
     /**

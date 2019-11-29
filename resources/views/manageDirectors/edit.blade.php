@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <form method="post" action="/directors/{{ $director->id }}">
+    <form method="post" action="/manage-directors/{{ $director->id }}">
         @method('PATCH')
         @csrf
         <div class="row">
@@ -38,7 +38,7 @@
     @include('errors')
     <div class="row">
         <div class="large-12 columns">
-            <a href="/directors">&laquo; Back to all Directors</a>
+            <a href="/manage-directors">&laquo; Back to all Directors</a>
         </div>
     </div>
 

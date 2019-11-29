@@ -15,16 +15,13 @@ Route::get('/', 'PagesController@home');
 
 Route::get('/foundation-test', 'PagesController@foundation');
 
-Route::delete('/reviews/{review}', 'FilmReviewsController@destroy');
-
-    Route::resource('/films', 'FilmsController');
+Route::delete('/reviews/{review}', 'FilmReviewsController@destroy')->middleware('can:manage-all');
 
 
+Route::resource('/manage-films', 'ManageFilmsController')->middleware('can:manage-all');
 
-        Route::resource('/films', 'FilmsController')->middleware('can:manage-users');
 
-
-Route::resource('/directors', 'DirectorsController');
+Route::resource('/manage-directors', 'ManageDirectorsController')->middleware('can:manage-all');
 
 Auth::routes();
 
