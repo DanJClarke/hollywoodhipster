@@ -14,7 +14,9 @@
                     <div class="large-6 columns">
                         @foreach($roles as $role)
                             <span class="role">
-                                <input id="role{{ $role->id }}" name="roles[]" type="checkbox" value="{{ $role->id }}">
+                                <input id="role{{ $role->id }}" name="roles[]" type="checkbox" value="{{ $role->id }}"
+                                    @if ($user->roles->pluck('id')->contains($role->id)) checked @endif
+                                >
                                 <label for="role{{ $role->id }}">{{ $role->name }}</label>
                             </span>
                         @endforeach

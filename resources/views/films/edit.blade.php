@@ -67,9 +67,7 @@
                 @foreach($allGenres as $genre)
                     <span class="genre">
                         <input id="genre{{ $genre->id }}" name="genres[]" type="checkbox" value="{{ $genre->id }}"
-                            @foreach($film->genres as  $film_genre)
-                                {{ $genre->id == $film_genre->id ? 'checked' : '' }}
-                            @endforeach
+                            @if ($film->genres->pluck('id')->contains($genre->id)) checked @endif
                         ><label for="genre{{ $genre->id }}">{{ $genre->name }}</label>
                     </span>
                 @endforeach
