@@ -7,7 +7,7 @@
 
         <link rel="stylesheet" href="/css/app.css">
         <style>
-            .genre{
+            .genre, .roles, .inline-block{
                 display: inline-block;
             }
         </style>

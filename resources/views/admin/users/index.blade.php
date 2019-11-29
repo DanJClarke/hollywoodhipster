@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'All films and Directors')
+@section('title', 'User administration')
 
 @section('content')
 
@@ -13,6 +13,7 @@
                         <th width="200">Users id</th>
                         <th>Users Name</th>
                         <th>Users Email</th>
+                        <th>User Roles</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -22,9 +23,14 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
                             <td>
                                 <a href="{{ route('admin.users.edit', $user->id) }}" class="success button">Edit</a>
-                                <a href="{{ route('admin.users.destroy', $user->id) }}" class="alert button">Delete</a>
+                                <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="alert button">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
