@@ -10,13 +10,20 @@
                 Movies
             </div>
             <div class="row">
-               @foreach($tasks as $task)
-                <div class="small-12 large-6 large-3 columns">
-                    <img src="{{ $film->imgsrc }}" alt="{{ $film->name }} poster"/>
-                    <h2>{{ $film->name }}</h2>
-                    <ul>
-
-                    </ul>
+               @foreach($allFilms as $film)
+                <div class="small-12 medium-6 large-3 columns flex" style="padding: 10px;">
+                    <div style="background: grey;">
+                        <img src="/uploads/{{ $film->imgsrc }}" alt="{{ $film->name }} poster"/>
+                        <h2>{{ $film->title }}</h2>
+                        <ul>
+                            <li>{{ date('Y', strtotime($film->release_date)) }}</li>
+                            <li>
+                                @foreach( ) (
+                                     {{ }}
+                                @endforeach
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                @endforeach
             </div>

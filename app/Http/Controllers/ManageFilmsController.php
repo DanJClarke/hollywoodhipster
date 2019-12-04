@@ -59,12 +59,15 @@ class ManageFilmsController extends Controller
         $film = Film::create(request()->validate([
             'title' => ['required'],
             'director_id' => ['required'],
-            'imgsrc' => ['required'],
+            'imgsrc' => ['required|mimes:png,jpeg,jpg,gif'],
             'running_time' => ['required'],
             'release_date' => ['required'],
             'budget' => ['required'],
             'plot' => ['required'],
         ]));
+
+        $imgFile = time().'.'.$request->imgsrc->extension();
+        $request->imgsrc->move(public_path('uploads'), $imgFile);
 
         $film->genres()->sync(request('genres'));
 
@@ -122,15 +125,32 @@ class ManageFilmsController extends Controller
             return redirect()->route('welcome');
         }
 
-        $film->update(request()->validate([
-            'title' => ['required'],
-            'director_id' => ['required'],
-            'imgsrc' => ['required'],
-            'running_time' => ['required'],
-            'release_date' => ['required'],
-            'budget' => ['required'],
-            'plot' => ['required']
-        ]));
+        request()->validate([
+            'title'         => 'required',
+            'director_id'   => 'required',
+            'imgsrc'        => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'running_time'  => 'required',
+            'release_date'  => 'required',
+            'budget'        => 'required',
+            'plot'          => 'required'
+        ]);
+
+        $imageName='';
+
+        if(request()->imgsrc){
+            $imageName = time().'.'.$request->imgsrc->extension();
+            $request->imgsrc->move(public_path('uploads'), $imageName);
+        }
+
+        $film->update([
+            'title'         => request('title'),
+            'director_id'   => request('director_id'),
+            'imgsrc'        => $imageName ? $imageName : $film->imgsrc,
+            'running_time'  => request('running_time'),
+            'release_date'  => request('release_date'),
+            'budget'        => request('budget'),
+            'plot'          => request('plot')
+        ]);
 
         $film->genres()->sync(request('genres'));
 

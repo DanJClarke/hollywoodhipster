@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <form method="post" action="/manage-films/{{ $film->id }}">
+    <form method="post" action="/manage-films/{{ $film->id }}" enctype="multipart/form-data">
         @method('PATCH')
         @csrf
         <div class="row">
@@ -33,8 +33,9 @@
         </div>
         <div class="row">
             <div class="large-3 columns">
+                <img src="/uploads/{{ $film->imgsrc }}" alt="{{ $film->title }} poster"/>
                 <label>Film image
-                    <input type="text" name="imgsrc" placeholder="please add a path"  value={{ $film->imgsrc }} required/>
+                    <input type="file" {{ $errors->has('imgsrc')  ? "class='warning'" : "" }} name="imgsrc"  value="{{ old('imgsrc') }}" />
                 </label>
             </div>
             <div class="large-3 columns">

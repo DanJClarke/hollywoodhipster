@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <form method="post" action="/manage-films">
+    <form method="post" action="/manage-films" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="large-4 columns">
@@ -34,7 +34,7 @@
         <div class="row">
             <div class="large-3 columns">
                 <label>Film image
-                    <input type="text" {{ $errors->has('imgsrc')  ? "class='warning'" : "" }} name="imgsrc"  placeholder="please add a path" value="{{ old('imgsrc') }}" required />
+                    <input type="file" {{ $errors->has('imgsrc')  ? "class='warning'" : "" }} name="imgsrc"  value="{{ old('imgsrc') }}" required />
                 </label>
             </div>
             <div class="large-3 columns">

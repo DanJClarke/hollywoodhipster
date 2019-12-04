@@ -1,20 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Film;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
     public function home(){
-
-        return view('welcome')->with([
-            'tasks' =>[
-                'task 1',
-                'task 2',
-                'task 3'
-                ]
-        ]);
+        return view('welcome')->withAllFilms(Film::all());;
 
     }
 
