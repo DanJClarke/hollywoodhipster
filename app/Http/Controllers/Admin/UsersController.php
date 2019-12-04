@@ -29,6 +29,10 @@ class UsersController extends Controller
      */
     public function index()
     {
+        if(Gate::denies('manage-all')){
+            return redirect()->route('home');
+        }
+
         $users = User::all();
         return view('admin.users.index')->with('users', $users);
     }
@@ -41,7 +45,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        if(Gate::denies('edit-users')){
+        if(Gate::denies('manage-all')){
             return redirect()->route('admin.users.index');
         }
 
@@ -78,7 +82,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
 
-        if(Gate::denies('delete-users')){
+        if(Gate::denies('manage-all')){
             return redirect()->route('admin.users.index');
         }
         $user->roles()->detach();

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'Director Details')
 
@@ -14,7 +14,7 @@
             <p>Films:</p>
             <ul>
             @foreach($director->films as $film)
-                <li><a href="/films/{{ $film->id }}">{{ $film->title }}</a></li>
+                <li><a href="/manage-films/{{ $film->id }}">{{ $film->title }}</a></li>
             @endforeach
             </ul>
 

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'film details')
 
@@ -7,11 +7,11 @@
     <div class="row">
         <div class="large-12 columns">
             <h1>{{ $film->title }}</h1>
-            <a href="/films/{{ $film->id }}/edit">edit</a>
+            <a href="/manage-films/{{ $film->id }}/edit">edit</a>
             <br/>
             <br/>
             <p>Directed by:
-            <a href="/directors/{{ $film->director->id }}">{{ $film->director->name }}</a>
+            <a href="/manage-directors/{{ $film->director->id }}">{{ $film->director->name }}</a>
             <img src="{{ $film->imgsrc }}" alt="{{ $film->title }} poster" />
             <p>Running time: {{  $film->running_time }} </p>
             <p>Release date: {{  $film->release_date }} </p>

@@ -1,5 +1,4 @@
-@extends('layout')
-
+@extends('layouts.app')
 @section('title', 'Add a Director to the database ')
 
 @section('content')

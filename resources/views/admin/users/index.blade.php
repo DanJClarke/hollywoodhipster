@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'User administration')
 
@@ -25,7 +25,7 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
                             <td>
-                                @can('edit-users')
+                                @can(['manage-users'])
                                     <a href="{{ route('admin.users.edit', $user->id) }}" class="success button">Edit</a>
                                 @endcan
                                 @can('delete-users')

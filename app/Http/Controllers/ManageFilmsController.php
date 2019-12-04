@@ -18,7 +18,7 @@ class ManageFilmsController extends Controller
     public function index()
     {
         if(Gate::denies('users')){
-            return redirect()->route('home');
+            return redirect()->route('welcome');
         }
 
        return view('ManageFilms.index')
@@ -35,7 +35,7 @@ class ManageFilmsController extends Controller
     public function create()
     {
         if(Gate::denies('manage-all')){
-            return redirect()->route('home');
+            return redirect()->route('welcome');
         }
 
         return view('ManageFilms.create')
@@ -53,7 +53,7 @@ class ManageFilmsController extends Controller
     public function store(Request $request)
     {
         if(Gate::denies('manage-all')){
-            return redirect()->route('home');
+            return redirect()->route('welcome');
         }
 
         $film = Film::create(request()->validate([
@@ -79,9 +79,11 @@ class ManageFilmsController extends Controller
      */
     public function show(Film $film)
     {
-        if(Gate::denies('manage-all')){
-            return redirect()->route('home');
+
+       if(Gate::denies('manage-all')){
+            return redirect()->route('welcome');
         }
+
 
         return view('ManageFilms.show', compact('film'));
     }
@@ -94,8 +96,10 @@ class ManageFilmsController extends Controller
      */
     public function edit(Film $film)
     {
+
+
         if(Gate::denies('manage-all')){
-            return redirect()->route('home');
+            return redirect()->route('welcome');
         }
 
         return view('ManageFilms.edit')
@@ -115,7 +119,7 @@ class ManageFilmsController extends Controller
     public function update(Request $request, Film $film)
     {
         if(Gate::denies('manage-all')){
-            return redirect()->route('home');
+            return redirect()->route('welcome');
         }
 
         $film->update(request()->validate([
@@ -143,7 +147,7 @@ class ManageFilmsController extends Controller
     public function destroy(Film $film)
     {
         if(Gate::denies('manage-all')){
-            return redirect()->route('home');
+            return redirect()->route('welcome');
         }
 
        $film->delete();

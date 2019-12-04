@@ -82,6 +82,8 @@ class ManageDirectorsController extends Controller
             });
         });
 
+
+
         return view('manageDirectors.show')
             ->withDirector($director)
             ->withDirectorsGenres($genres);
