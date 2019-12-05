@@ -30,7 +30,7 @@
         <h3>Reviews</h3>
         <div>
             @foreach ($film->reviews as $review)
-                <form method="POST" action="/reviews/{{ $review->id }}">
+                <form method="POST" action="/manage-reviews/{{ $review->id }}">
                     @method('DELETE')
                     @csrf
                     {{ $review->content }}
@@ -38,7 +38,6 @@
                 </label>
                 </form>
             @endforeach
-
         <div>
     </div>
     <div class="row">

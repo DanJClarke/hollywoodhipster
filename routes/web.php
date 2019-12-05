@@ -15,7 +15,22 @@ Route::get('/', 'PagesController@home');
 
 Route::get('/foundation-test', 'PagesController@foundation');
 
-Route::delete('/reviews/{review}', 'FilmReviewsController@destroy')->middleware('can:manage-all');
+Route::delete('/manage-reviews/{review}', 'FilmReviewsController@destroy')->middleware('can:manage-all');
+Route::get('/manage-reviews/{review}/edit', 'FilmReviewsController@edit')->middleware('can:add-reviews');
+Route::patch('/manage-reviews/{review}', 'FilmReviewsController@update')->middleware('can:add-reviews');
+Route::patch('/manage-reviews/{review}', 'FilmReviewsController@update')->middleware('can:add-reviews');
+
+//======== Routes for Managing Reviews ============================
+
+Route::get('/manage-reviews', 'FilmReviewsController@index')->name('reviews.manage')->middleware('can:manage-all');
+Route::get('/manage-reviews/create', 'FilmReviewsController@create')->name('reviews.create')->middleware('can:add-reviews');
+Route::get('/manage-reviews/{review}', 'FilmReviewsController@show')->name('reviews.show');
+Route::get('/manage-my-reviews/{user}', 'FilmReviewsController@showMine')->name('reviews.mine');
+Route::post('/manage-reviews', 'FilmReviewsController@store')->name('reviews.store')->middleware('can:add-reviews');
+Route::get('/manage-my-reviews/{review}/edit', 'FilmReviewsController@edit')->name('reviews.edit')->middleware('can:add-reviews');
+Route::patch('/manage-my-reviews/{review}', 'FilmReviewsController@update')->name('reviews.update')->middleware('can:add-reviews');
+Route::delete('/manage-reviews/{review}', 'FilmReviewsController@destroy')->name('reviews.delete')->middleware('can:manage-users');
+
 
 //======== Routes for Managing Films ============================
 

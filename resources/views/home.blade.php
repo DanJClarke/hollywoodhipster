@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="large-12 columns">
-            <p>Hi {{ Auth::user()->name }}, welocme to your movie dashboard!</p>
+            <p>Hi {{ Auth::user()->name }}, welcome to your movie dashboard!</p>
             @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
