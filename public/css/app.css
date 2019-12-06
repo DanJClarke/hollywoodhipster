@@ -5905,3 +5905,7 @@ a.thumbnail image {
   fill: transparent;
 }
 
+.film-card img {
+  width: 100%;
+}
+

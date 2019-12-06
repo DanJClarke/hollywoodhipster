@@ -4,26 +4,15 @@
 
     @section('content')
 
-    <div class="content">
-        <div class="title m-b-md">
-            Movies
+    <div id="root">
+        <div class="row">
+            <div class="large-12 columns">
+                <h1>Movies</h1>
+            </div>
         </div>
         <div class="row">
-           @foreach($allFilms as $film)
-            <div class="small-12 medium-6 large-3 columns flex film-card" style="padding: 10px;">
-                <div style="background: grey;">
-                    <img src="/uploads/{{ $film->imgsrc }}" alt="{{ $film->name }} poster"/>
-                    <h2>{{ $film->title }}</h2>
-                    <ul>
-                        <li>{{ date('Y', strtotime($film->release_date)) }}</li>
-                        <li>
-
-                        </li>
-                    </ul>
-                </div>
-            </div>
-           @endforeach
-        </div>
+            <film-parent></film-parent>
+        <div>
     </div>
 
     @endsection

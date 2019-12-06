@@ -15,16 +15,16 @@ Route::get('/', 'PagesController@home');
 
 Route::get('/foundation-test', 'PagesController@foundation');
 
-Route::delete('/manage-reviews/{review}', 'FilmReviewsController@destroy')->middleware('can:manage-all');
-Route::get('/manage-reviews/{review}/edit', 'FilmReviewsController@edit')->middleware('can:add-reviews');
-Route::patch('/manage-reviews/{review}', 'FilmReviewsController@update')->middleware('can:add-reviews');
-Route::patch('/manage-reviews/{review}', 'FilmReviewsController@update')->middleware('can:add-reviews');
+//Route::delete('/manage-reviews/{review}', 'FilmReviewsController@destroy')->middleware('can:manage-all');
+//Route::get('/manage-reviews/{review}/edit', 'FilmReviewsController@edit')->middleware('can:add-reviews');
+//Route::patch('/manage-reviews/{review}', 'FilmReviewsController@update')->middleware('can:add-reviews');
+//Route::patch('/manage-reviews/{review}', 'FilmReviewsController@update')->middleware('can:add-reviews');
 
 //======== Routes for Managing Reviews ============================
 
-Route::get('/manage-reviews', 'FilmReviewsController@index')->name('reviews.manage')->middleware('can:manage-all');
+Route::get('/reviews', 'FilmReviewsController@index')->name('reviews');
+Route::get('/reviews/{film_id}', 'FilmReviewsController@show')->name('reviews.show');
 Route::get('/manage-reviews/create', 'FilmReviewsController@create')->name('reviews.create')->middleware('can:add-reviews');
-Route::get('/manage-reviews/{review}', 'FilmReviewsController@show')->name('reviews.show');
 Route::get('/manage-my-reviews/{user}', 'FilmReviewsController@showMine')->name('reviews.mine');
 Route::post('/manage-reviews', 'FilmReviewsController@store')->name('reviews.store')->middleware('can:add-reviews');
 Route::get('/manage-my-reviews/{review}/edit', 'FilmReviewsController@edit')->name('reviews.edit')->middleware('can:add-reviews');
@@ -42,6 +42,11 @@ Route::post('/manage-films', 'ManageFilmsController@store')->name('films.store')
 Route::get('/manage-films/{film}/edit', 'ManageFilmsController@edit')->name('films.edit');
 Route::patch('/manage-films/{film}', 'ManageFilmsController@update')->name('films.update');
 Route::delete('/manage-films/{film}', 'ManageFilmsController@destory')->name('films.delete');
+
+//======== Routes  Films ============================
+
+Route::get('/film-data', 'FilmController@index')->name('films.data');
+
 
 
 //======== Routes for Managing Directors ============================
@@ -64,7 +69,16 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //======== Routes for Admin ============================
-
-Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
-    Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
+    Route::get('users/{user_id}', 'UsersController@show');
 });
+
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
+
+    Route::resource('/users', 'UsersController', ['except' => [ 'create', 'store']]);
+
+});
+
+
+
+

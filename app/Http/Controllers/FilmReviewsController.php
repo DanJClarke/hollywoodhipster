@@ -18,7 +18,7 @@ class FilmReviewsController extends Controller
      */
     public function index()
     {
-        //
+        return Review::select('id','content','user_id', 'film_id')->get();
     }
 
     /**
@@ -28,7 +28,7 @@ class FilmReviewsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -39,7 +39,7 @@ class FilmReviewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -48,9 +48,12 @@ class FilmReviewsController extends Controller
      * @param  \App\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function show(Review $review)
+    public function show($id)
     {
-        //
+
+        return Review::where('film_id', $id)->get();
+
+
     }
 
     /**

@@ -14,9 +14,7 @@
                 display: inline-block;
             }
 
-            .film-card img {
-               width: 100%;
-            }
+
         </style>
     </head>
 <body>

@@ -18,7 +18,7 @@ class UsersController extends Controller
 
     public function __construct(){
 
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show']);
     }
 
 
@@ -56,6 +56,12 @@ class UsersController extends Controller
         ]);
     }
 
+
+    public function show($id)
+    {
+       return User::where('id', $id)->get();
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -65,6 +71,8 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+
+
         $user->roles()->sync($request->roles);
         $user->update(request()->validate([
             'name' => ['required'],
