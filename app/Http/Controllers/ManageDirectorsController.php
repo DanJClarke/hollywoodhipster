@@ -46,6 +46,7 @@ class ManageDirectorsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -65,7 +66,8 @@ class ManageDirectorsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Director  $director
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Director $director)
@@ -82,8 +84,6 @@ class ManageDirectorsController extends Controller
             });
         });
 
-
-
         return view('manageDirectors.show')
             ->withDirector($director)
             ->withDirectorsGenres($genres);
@@ -92,7 +92,8 @@ class ManageDirectorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Director  $director
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Director $director)
@@ -110,11 +111,11 @@ class ManageDirectorsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Director  $director
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Director $director)
+    public function update(Director $director)
     {
         if(Gate::denies('manage-all')){
             return redirect()->route('home');
@@ -126,16 +127,5 @@ class ManageDirectorsController extends Controller
         ]));
 
         return redirect('/manage-directors');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

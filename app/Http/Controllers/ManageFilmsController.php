@@ -41,13 +41,13 @@ class ManageFilmsController extends Controller
         return view('ManageFilms.create')
             ->withAllDirectors(Director::all())
             ->withAllGenres(Genre::all());
-
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -88,16 +88,15 @@ class ManageFilmsController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Film  $film
+     *
      * @return \Illuminate\Http\Response
      */
+
     public function show(Film $film)
     {
-
        if(Gate::denies('manage-all')){
             return redirect()->route('welcome');
         }
-
-
         return view('ManageFilms.show', compact('film'));
     }
 
@@ -105,12 +104,11 @@ class ManageFilmsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Film  $film
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Film $film)
     {
-
-
         if(Gate::denies('manage-all')){
             return redirect()->route('welcome');
         }
@@ -119,7 +117,6 @@ class ManageFilmsController extends Controller
             ->withFilm($film)
             ->withAllDirectors(Director::all())
             ->withAllGenres(Genre::all());
-
     }
 
     /**
@@ -127,6 +124,7 @@ class ManageFilmsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Film  $film
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Film $film)
@@ -165,13 +163,13 @@ class ManageFilmsController extends Controller
         $film->genres()->sync(request('genres'));
 
         return redirect('/manage-films');
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Film  $film
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Film $film)

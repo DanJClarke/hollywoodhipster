@@ -9,29 +9,10 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('title', 'Hollywood Hipster | The hipest movie reviews this side of the west coast ')</title>
         <link rel="stylesheet" href="/css/app.css">
-        <style>
-            .genre, .roles, .inline-block{
-                display: inline-block;
-            }
-
-
-        </style>
     </head>
 <body>
 <!-- TOPBAR SECTION -->
-
-
-
     <div id="app">
-
-
-
-
-
-
-
-
-
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -46,7 +27,6 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -80,7 +60,7 @@
                                             User management
                                         </a>
                                     @endcan
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
                                     </form>
                                 </div>
@@ -90,42 +70,11 @@
                 </div>
             </div>
         </nav>
-
         <main>
             @yield('content')
         </main>
     </div>
     <script src="/js/app.js"></script>
-    <script>
-
-            var initialval = document.querySelector('[name="rating"]');
-            var stars = document.querySelectorAll('[data-rating] .star');
-
-            if(initialval && initialval.value){
-                for(let i = 0; i< stars.length; i++){
-                    if(stars[i].getAttribute('data-rating') == initialval.value){
-                        stars[i].classList.add('selected');
-                        stars[i].parentNode.classList.add('is-voted');
-                    }
-                }
-            }
-
-            for(let i = 0; i< stars.length; i++){
-                stars[i].addEventListener('click', function(){
-                    var siblings = this.parentNode.children;
-
-                    for(let j = 0; j< siblings.length; j++){
-                        siblings[j].classList.remove('selected');
-                    }
-
-                    this.classList.add('selected');
-                    this.parentNode.classList.add('is-voted');
-                    initialval.value = this.getAttribute('data-rating');
-                });
-            }
-
-
-        </script>
 </body>
 </html>
 

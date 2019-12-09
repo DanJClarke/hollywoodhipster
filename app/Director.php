@@ -16,5 +16,4 @@ class Director extends Model
     {
         return $this->hasMany(Film::class);
     }
-
 }

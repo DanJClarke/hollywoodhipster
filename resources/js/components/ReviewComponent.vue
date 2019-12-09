@@ -9,22 +9,18 @@
 </template>
 
 <script>
+export default {
+    props: ['review', 'reviewId', 'userId'],
 
-    export default {
-
-        name: 'Review',
-
-        props: ['review', 'reviewId', 'userId'],
-
-        data(){
-            return{
-                userName: '',
-            }
-        },
-
-        mounted() {
-            axios.get(`/admin/users/${this.$props.userId}`)
-            .then(response => this.userName = response.data[0].name)
+    data(){
+        return{
+            userName: '',
         }
+    },
+
+    mounted() {
+        axios.get(`/admin/users/${this.$props.userId}`)
+        .then(response => this.userName = response.data[0].name)
     }
+}
 </script>

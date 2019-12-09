@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class FilmReviewsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Return a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -22,38 +22,14 @@ class FilmReviewsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Return the specified resource.
      *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Review  $review
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-
         return Review::where('film_id', $id)->get();
-
-
     }
 
     /**
@@ -64,7 +40,6 @@ class FilmReviewsController extends Controller
      */
     public function edit(Review $review)
     {
-
         if(Gate::denies('manage-users')){
             return redirect()->route('home');
         }
@@ -81,24 +56,29 @@ class FilmReviewsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Display the specified resource
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Review  $review
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
     public function showMine(User $user)
     {
         $myReviews = Review::all()->where('user_id', '=', $user->id);
         $myRatings = Rating::all()->where('user_id', '=', $user->id);
+
         return view('manageReviews.show', compact('myReviews', 'myRatings'));
     }
 
-
-
-    public function update(Request $request, Review $review)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Review  $review
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Review $review)
     {
         if(Gate::denies('manage-users')){
+
             return redirect()->route('home');
         }
 
@@ -110,21 +90,20 @@ class FilmReviewsController extends Controller
         ]);
 
         $review->update([
-            'content' => request('content')
+            'content'       => request('content')
         ]);
 
         if(request()->rating){
             Rating::updateOrCreate([
-                'film_id' => request('film_id'),
-                'user_id' => Auth::user()->id
+                'film_id'   => request('film_id'),
+                'user_id'   => Auth::user()->id
             ],[
-                'rating' => request('rating')
+                'rating'    => request('rating')
             ]);
         }
 
         return redirect('/manage-my-reviews/' . $review->user_id);
     }
-
 
     /**
      * Remove the specified resource from storage.
