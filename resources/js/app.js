@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('film-parent', require('./components/FilmParentComponent.vue').default);
+Vue.component('parallax-parent', require('./components/ParallaxpParentComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
