@@ -1899,6 +1899,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1913,7 +1918,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('/film-data').then(function (response) {
-      return _this.filmList = response.data;
+      _this.filmList = response.data;
     });
   }
 });
@@ -2007,10 +2012,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    filmId: {
+      type: Number,
+      "default": null
+    },
+    film: {
+      type: Object,
+      "default": {}
+    }
+  },
   components: {
     Reviews: _reviewsComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['film', 'filmId'],
   filters: {
     Year: function Year(date) {
       return moment__WEBPACK_IMPORTED_MODULE_0___default()(date).format('YYYY');
@@ -2041,11 +2055,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['parallax', 'index'],
+  props: {
+    parallax: {
+      type: Object,
+      "default": {}
+    },
+    index: {
+      type: Number,
+      "default": null
+    }
+  },
   data: function data() {
     return {
       yPos: 0
     };
+  },
+  mounted: function mounted() {
+    this.handleScroll();
   },
   methods: {
     handleScroll: function handleScroll() {
@@ -2082,7 +2108,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['review', 'reviewId', 'userId'],
+  props: {
+    userId: {
+      type: Number,
+      "default": null
+    },
+    reviewId: {
+      type: Number,
+      "default": null
+    },
+    review: {
+      type: Object,
+      "default": {}
+    }
+  },
   data: function data() {
     return {
       userName: ''
@@ -2117,7 +2156,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['filmId'],
+  props: {
+    filmId: {
+      type: Number,
+      "default": null
+    }
+  },
   data: function data() {
     return {
       reviewContent: ''
@@ -2125,17 +2169,30 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submitted: function submitted(event) {
-      s;
+      var _this = this;
 
       if (this.reviewContent != '') {
-        this.$emit('submitted', this.reviewContent);
-        this.reviewContent = '';
-      } //submit(requestType, url){
-      //  axios[requestType](url, this.data())
-      //      .then(this.onSuccess.bind(this))
-      //      .catch(this.onFail.bind(this))
-      //}
+        axios.post("/manage-reviews", {
+          'content': this.reviewContent,
+          'film_id': this.$props.filmId,
+          'user_id': 2
+        }).then(function (response) {
+          _this.$emit('submitted', _this.reviewContent);
 
+          _this.$emit('status', {
+            message: response.data,
+            hasReviewedFlag: true
+          });
+        })["catch"](function (error) {
+          if (error.response.status === 500) {
+            _this.$emit('status', {
+              message: 'You have already reviewed this film',
+              errorFlag: true
+            });
+          }
+        });
+        this.reviewContent = '';
+      }
     }
   }
 });
@@ -2163,10 +2220,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['filmId'],
+  props: {
+    filmId: {
+      type: Number,
+      "default": null
+    }
+  },
   components: {
     Review: _reviewComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
     ReviewForm: _reviewFormComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -2174,7 +2237,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       reviewContent: '',
-      reviews: []
+      reviews: [],
+      reviewStatus: '',
+      userHasReviewed: false,
+      hasError: false
     };
   },
   methods: {
@@ -2184,6 +2250,11 @@ __webpack_require__.r(__webpack_exports__);
         content: this.reviewContent,
         user_id: 2
       });
+    },
+    updateStatus: function updateStatus(status) {
+      this.reviewStatus = status.message;
+      this.userHasReviewed = status.hasReviewedFlag || this.userHasReviewed;
+      this.hasError = status.errorFlag || this.hasError;
     }
   },
   mounted: function mounted() {
@@ -58332,17 +58403,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "filmParent" } },
-    _vm._l(_vm.filmList, function(film) {
-      return _c("film-card", {
-        key: film.id,
-        attrs: { filmId: film.id, film: film }
-      })
-    }),
-    1
-  )
+  return _c("div", { attrs: { id: "filmParent" } }, [
+    _vm.filmList.length > 0
+      ? _c(
+          "div",
+          _vm._l(_vm.filmList, function(film) {
+            return _c("film-card", {
+              key: film.id,
+              attrs: { filmId: film.id, film: film }
+            })
+          }),
+          1
+        )
+      : _c("div", { staticClass: "callout warning" }, [
+          _vm._v("\n        No films in the database\n    ")
+        ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -58551,7 +58627,7 @@ var render = function() {
           expression: "reviewContent"
         }
       ],
-      attrs: { width: "100%", rows: "5" },
+      attrs: { width: "100%", name: "content", rows: "5" },
       domProps: { value: _vm.reviewContent },
       on: {
         input: function($event) {
@@ -58625,9 +58701,29 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
+      _c("div", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.reviewStatus,
+            expression: "reviewStatus"
+          }
+        ],
+        class: ["callout", "success", { warning: _vm.hasError }],
+        domProps: { textContent: _vm._s(_vm.reviewStatus) },
+        model: {
+          value: _vm.reviewStatus,
+          callback: function($$v) {
+            _vm.reviewStatus = $$v
+          },
+          expression: "reviewStatus"
+        }
+      }),
+      _vm._v(" "),
       _c("review-form", {
         attrs: { filmId: _vm.filmId },
-        on: { submitted: _vm.updateReviews }
+        on: { submitted: _vm.updateReviews, status: _vm.updateStatus }
       })
     ],
     1

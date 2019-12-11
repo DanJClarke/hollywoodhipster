@@ -22,11 +22,20 @@ import moment from 'moment'
 import Reviews from './reviewsComponent'
 
 export default {
+   props:{
+        filmId:{
+           type: Number,
+           default: null
+        },
+        film:{
+           type: Object,
+           default: {}
+        }
+    },
+
     components: {
         Reviews
     },
-
-    props: ['film', 'filmId'],
 
     filters: {
         Year(date){

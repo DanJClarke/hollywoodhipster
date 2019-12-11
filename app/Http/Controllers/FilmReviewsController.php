@@ -22,6 +22,25 @@ class FilmReviewsController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+       Review::create(request()->validate([
+            'content' => ['required'],
+            'film_id' => ['required'],
+            'user_id' => ['required'],
+        ]));
+
+        return response()->json('comment stored!');
+
+    }
+
+    /**
      * Return the specified resource.
      *
      * @param  $id

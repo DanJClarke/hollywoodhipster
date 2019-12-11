@@ -16,6 +16,11 @@ class FilmController extends Controller
      */
     public function index()
     {
-        return  Film::with(['director','genres'])->get();
+        $allFilms = Film::with(['director','genres'])->get();
+
+        if($allFilms){
+            return $allFilms;
+        }
+        return response()->json('No Films in the database!', 404);
     }
 }

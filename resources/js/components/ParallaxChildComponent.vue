@@ -6,12 +6,25 @@
 
 <script>
 export default {
-    props: ['parallax', 'index'],
+    props: {
+        parallax:{
+           type: Object,
+           default: {}
+        },
+        index:{
+           type: Number,
+           default: null
+        }
+    },
 
     data(){
         return {
             yPos:  0,
         }
+    },
+
+    mounted(){
+        this.handleScroll();
     },
 
     methods:{

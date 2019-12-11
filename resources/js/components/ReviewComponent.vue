@@ -10,7 +10,20 @@
 
 <script>
 export default {
-    props: ['review', 'reviewId', 'userId'],
+    props: {
+        userId:{
+           type: Number,
+           default: null
+        },
+        reviewId:{
+           type: Number,
+           default: null
+        },
+         review:{
+           type: Object,
+           default: {}
+        }
+    },
 
     data(){
         return{

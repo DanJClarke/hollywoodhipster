@@ -97,7 +97,8 @@ class ManageFilmsController extends Controller
        if(Gate::denies('manage-all')){
             return redirect()->route('welcome');
         }
-        return view('ManageFilms.show', compact('film'));
+
+        return view('ManageFilms.show')->withFilm($film);
     }
 
     /**

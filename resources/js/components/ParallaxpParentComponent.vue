@@ -22,7 +22,7 @@ export default {
                 {speed: 22, imgsrc:"hollywood-parallax-5.svg"},
                 {speed: 32, imgsrc:"hollywood-parallax-6.svg"},
                 {speed: 32, imgsrc:"hollywood-parallax-7.svg"},
-                {speed: 32, imgsrc:"hollywood-parallax-8.svg"},
+                {speed: 32, imgsrc:"hollywood-parallax-8.svg"}
             ]
         }
     }
