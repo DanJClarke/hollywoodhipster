@@ -14,26 +14,31 @@ import Review from './reviewComponent'
 import ReviewForm from './reviewFormComponent'
 
 export default {
-    props: {
-        filmId:{
-           type: Number,
-           default: null
-        }
-    },
-
     components: {
         Review,
         ReviewForm
     },
 
+    props: {
+        filmId:{
+           default: null,
+           type: Number
+        }
+    },
+
     data(){
         return{
-            reviewContent:'',
             reviews: [],
+            reviewContent:'',
             reviewStatus:'',
-            userHasReviewed: false,
-            hasError: false
+            hasError: false,
+            userHasReviewed: false
         }
+    },
+
+    mounted() {
+        axios.get(`/reviews/${this.$props.filmId}`)
+             .then(response => this.reviews = response.data);
     },
 
     methods:{
@@ -46,16 +51,11 @@ export default {
         },
 
         updateStatus(status){
+            this.hasError = status.errorFlag || this.hasError;
             this.reviewStatus = status.message;
             this.userHasReviewed = status.hasReviewedFlag || this.userHasReviewed;
-            this.hasError = status.errorFlag || this.hasError;
         }
-    },
-
-    mounted() {
-        axios.get(`/reviews/${this.$props.filmId}`)
-             .then(response => this.reviews = response.data);
-    },
+    }
 }
 </script>
 

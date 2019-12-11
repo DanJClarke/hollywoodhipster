@@ -18,14 +18,23 @@ class Film extends Model
         'plot'
     ];
 
+    /**
+     * Get all of the reviews for the film.
+     */
     public function reviews(){
         return $this->hasMany(Review::class);
     }
 
+    /**
+    * The genres that belong to the film.
+    */
     public function genres(){
         return $this->belongsToMany(Genre::class)->withTimestamps();
     }
 
+    /**
+    * The director who belongs to the film.
+    */
     public function director(){
         return $this->belongsTo(Director::class);
     }

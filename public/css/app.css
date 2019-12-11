@@ -5903,10 +5903,6 @@ body {
   fill: #cc4b37;
 }
 
-.rating-block .rating-block-rating.is-voted .star polygon {
-  fill: #cc4b37;
-}
-
 .rating-block .rating-block-rating.is-voted .star.selected ~ .star polygon {
   fill: transparent;
 }

@@ -8,10 +8,10 @@
 
 <script>
 export default {
-    props: {
+    props:{
         filmId:{
-           type: Number,
-           default: null
+           default: null,
+           type: Number
         }
     },
 

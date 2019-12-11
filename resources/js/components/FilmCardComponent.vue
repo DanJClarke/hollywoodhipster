@@ -1,6 +1,6 @@
 <template>
-    <div class="small-12 medium-6 large-3 columns flex film-card">
-        <div>
+    <div class="small-12 medium-6 large-3 columns flex">
+        <div class="film-card">
             <div>
                 <img :src="`uploads/${ film.imgsrc }`" :alt="`${ film.title } poster`"/>
             </div>
@@ -22,41 +22,37 @@ import moment from 'moment'
 import Reviews from './reviewsComponent'
 
 export default {
-   props:{
-        filmId:{
-           type: Number,
-           default: null
-        },
-        film:{
-           type: Object,
-           default: {}
-        }
-    },
-
     components: {
         Reviews
     },
 
     filters: {
-        Year(date){
-            return moment(date).format('YYYY')
-        },
-
         currency(budget){
             let BudgeToString = budget.toString();
             let i = (BudgeToString.length > 3) ? BudgeToString.length % 3 : 0;
             return  (i ? BudgeToString.substr(0, i) + ',' : '') + BudgeToString.substr(i).replace(/(\d{3})(?=\d)/g, "$1" + ',')
-        }
+        },
+
+        Year(date){
+            return moment(date).format('YYYY')
+        },
+    },
+
+    props:{
+        film:{
+            default: {},
+            type: Object
+        },
+        filmId:{
+            default: null,
+            type: Number
+        },
     }
 }
 </script>
 
 <style lang="scss" scoped>
 .film-card{
-    padding: 10px;
-
-    & > div{
-        background: grey;
-    }
+    background: grey;
 }
 </style>

@@ -37,13 +37,13 @@ class FilmReviewsController extends Controller
         ]));
 
         return response()->json('comment stored!');
-
     }
 
     /**
      * Return the specified resource.
      *
      * @param  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -55,6 +55,7 @@ class FilmReviewsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Review  $review
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Review $review)
@@ -78,6 +79,7 @@ class FilmReviewsController extends Controller
      * Display the specified resource
      *
      * @param  \App\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function showMine(User $user)
@@ -92,6 +94,7 @@ class FilmReviewsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Review  $review
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Review $review)
@@ -128,6 +131,7 @@ class FilmReviewsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Review  $review
+     * 
      * @return \Illuminate\Http\Response
      */
     public function destroy(Review $review)

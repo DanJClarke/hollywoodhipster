@@ -12,6 +12,9 @@ class Director extends Model
         'bio'
     ];
 
+    /**
+     * Get all of the films for the director.
+     */
     public function films()
     {
         return $this->hasMany(Film::class);

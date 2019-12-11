@@ -6,14 +6,15 @@
 
 <script>
 export default {
+
     props: {
-        parallax:{
-           type: Object,
-           default: {}
-        },
         index:{
-           type: Number,
-           default: null
+           default: null,
+           type: Number
+        },
+        parallax:{
+           default: {},
+           type: Object,
         }
     },
 
@@ -21,6 +22,14 @@ export default {
         return {
             yPos:  0,
         }
+    },
+
+    created() {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+
+    destroyed() {
+        window.removeEventListener('scroll', this.handleScroll);
     },
 
     mounted(){
@@ -31,26 +40,18 @@ export default {
         handleScroll(){
             this.yPos =  -(window.pageYOffset * this.$props.parallax.speed / 100);
         }
-    },
-
-    created() {
-        window.addEventListener('scroll', this.handleScroll);
-    },
-
-    destroyed() {
-        window.removeEventListener('scroll', this.handleScroll);
     }
 }
 </script>
 
 <style lang="scss" scoped>
 .keyart_layer {
-    height: 100%;
     background-position: top center;
-    background-size: auto 80vw;
     background-repeat: no-repeat;
-    width: 100%;
+    background-size: auto 80vw;
+    height: 100%;
     position: absolute;
+    width: 100%;
 
     img{
         width: 100%;
@@ -62,8 +63,8 @@ export default {
 
     @media(min-width: 1250px){
         background-position: top center;
-        background-size: auto 1000px;
         background-repeat: no-repeat;
+        background-size: auto 1000px;
         width: 100%;
     }
 }

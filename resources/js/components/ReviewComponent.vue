@@ -10,18 +10,18 @@
 
 <script>
 export default {
-    props: {
-        userId:{
-           type: Number,
-           default: null
+    props:{
+        review:{
+           default: {},
+           type: Object
         },
         reviewId:{
-           type: Number,
-           default: null
+           default: null,
+           type: Number
         },
-         review:{
-           type: Object,
-           default: {}
+        userId:{
+           default: null,
+           type: Number
         }
     },
 
@@ -31,7 +31,7 @@ export default {
         }
     },
 
-    mounted() {
+    mounted(){
         axios.get(`/admin/users/${this.$props.userId}`)
         .then(response => this.userName = response.data[0].name)
     }

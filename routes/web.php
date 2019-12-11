@@ -51,7 +51,7 @@ Route::get('/film-data', 'FilmController@index')->name('films.data');
 
 //======== Routes for Managing Directors ============================
 
-//Route::resource('/manage-directors', 'ManageDirectorsController');
+//Route::resource('manage-directors', 'ManageDirectorsController');
 
 Route::get('/manage-directors', 'ManageDirectorsController@index');
 Route::get('/manage-directors/create', 'ManageDirectorsController@create');
@@ -79,7 +79,3 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => [ 'create', 'store']]);
 
 });
-
-
-
-

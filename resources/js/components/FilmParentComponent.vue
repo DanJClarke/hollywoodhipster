@@ -25,9 +25,9 @@ export default {
 
     mounted() {
         axios.get('/film-data')
-            .then(response => {
+             .then(response => {
                 this.filmList = response.data
-            })
+             })
     }
 }
 </script>

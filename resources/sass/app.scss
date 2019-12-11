@@ -46,9 +46,7 @@ body{
         fill: $rating-color;
     }
 
-    .rating-block-rating.is-voted .star polygon {
-        fill: $rating-color;
-    }
+
 
     .rating-block-rating.is-voted .star.selected ~ .star polygon {
         fill: transparent;

@@ -112,7 +112,7 @@ class ManageDirectorsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Director  $director
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Director $director)
