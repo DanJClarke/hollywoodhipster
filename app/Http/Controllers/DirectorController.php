@@ -6,6 +6,7 @@ use App\Film;
 use App\Director;
 use App\Genre;
 use Gate;
+use Illuminate\Http\Request;
 
 class DirectorController extends Controller
 {
@@ -49,10 +50,6 @@ class DirectorController extends Controller
      */
     public function store(Request $request)
     {
-        if(Gate::denies('manage-all')){
-            return redirect()->route('home');
-        }
-
         Director::create(request()->validate([
             'name' => ['required'],
             'bio' => ['required']
