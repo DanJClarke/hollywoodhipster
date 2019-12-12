@@ -10,7 +10,7 @@
             <a href="/manage-films/{{ $film->id }}/edit">edit</a>
             <br/>
             <br/>
-            <p>Directed by:
+            <p>Directed by:{{  $film->director->name }}</p>
 
             <img width="150" src="/uploads/{{ $film->imgsrc }}" alt="{{ $film->title }} poster" />
             <p>Running time: {{  $film->running_time }} </p>

@@ -69,7 +69,7 @@ class ManageFilmsController extends Controller
         $imageName = time().'.'.$request->imgsrc->extension();
         $request->imgsrc->move(public_path('uploads'), $imageName);
 
-        $film = Film::create([
+        $manage_film = Film::create([
             'title'         => request('title'),
             'director_id'   => request('director_id'),
             'imgsrc'        => $imageName,
@@ -79,7 +79,7 @@ class ManageFilmsController extends Controller
             'plot'          => request('plot')
         ]);
 
-        $film->genres()->sync(request('genres'));
+        $manage_film->genres()->sync(request('genres'));
 
         return redirect('/manage-films');
     }
@@ -87,35 +87,36 @@ class ManageFilmsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Film  $film
+     * @param  \App\Film  $manage_film
      *
      * @return \Illuminate\Http\Response
      */
 
-    public function show(Film $film)
+    public function show(Film $manage_film)
     {
+
        if(Gate::denies('manage-all')){
             return redirect()->route('welcome');
         }
 
-        return view('ManageFilms.show')->withFilm($film);
+        return view('ManageFilms.show')->withFilm($manage_film);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Film  $film
+     * @param  \App\Film  $manage_film
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Film $film)
+    public function edit(Film $manage_film)
     {
         if(Gate::denies('manage-all')){
             return redirect()->route('welcome');
         }
 
         return view('ManageFilms.edit')
-            ->withFilm($film)
+            ->withFilm($manage_film)
             ->withAllDirectors(Director::all())
             ->withAllGenres(Genre::all());
     }
@@ -124,11 +125,11 @@ class ManageFilmsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Film  $film
+     * @param  \App\Film  $manage_film
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Film $film)
+    public function update(Request $request, Film $manage_film)
     {
         if(Gate::denies('manage-all')){
             return redirect()->route('welcome');
@@ -151,17 +152,17 @@ class ManageFilmsController extends Controller
             $request->imgsrc->move(public_path('uploads'), $imageName);
         }
 
-        $film->update([
+        $manage_film->update([
             'title'         => request('title'),
             'director_id'   => request('director_id'),
-            'imgsrc'        => $imageName ? $imageName : $film->imgsrc,
+            'imgsrc'        => $imageName ? $imageName : $manage_film->imgsrc,
             'running_time'  => request('running_time'),
             'release_date'  => request('release_date'),
             'budget'        => request('budget'),
             'plot'          => request('plot')
         ]);
 
-        $film->genres()->sync(request('genres'));
+        $manage_film->genres()->sync(request('genres'));
 
         return redirect('/manage-films');
     }
@@ -169,18 +170,18 @@ class ManageFilmsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Film  $film
+     * @param  \App\Film  $manage_film
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Film $film)
+    public function destroy(Film $manage_film)
     {
         if(Gate::denies('manage-all')){
             return redirect()->route('welcome');
         }
 
-       $film->delete();
-       $film->genres()->sync(request('genres'));
+       $manage_film->delete();
+       $manage_film->genres()->sync(request('genres'));
 
        return redirect('/manage-films');
     }

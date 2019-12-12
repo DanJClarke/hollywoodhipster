@@ -23,22 +23,21 @@ export default {
         filmId:{
            default: null,
            type: Number
+        },
+        initialReviews:{
+           default: [],
+           type: Array
         }
     },
 
     data(){
         return{
-            reviews: [],
+            reviews: this.initialReviews,
             reviewContent:'',
             reviewStatus:'',
             hasError: false,
             userHasReviewed: false
         }
-    },
-
-    mounted() {
-        axios.get(`/reviews/${this.$props.filmId}`)
-             .then(response => this.reviews = response.data);
     },
 
     methods:{

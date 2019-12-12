@@ -12,7 +12,7 @@
                 <li>Genres: <span v-for="genre,key in film.genres">{{ film.genres[key].name }}, </span></li>
             </ul>
         </div>
-        <reviews :filmId="filmId"></reviews>
+        <reviews :filmId="filmId" :initialReviews="film.reviews"></reviews>
     </div>
 </template>
 

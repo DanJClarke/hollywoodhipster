@@ -7,9 +7,7 @@ use App\Director;
 use App\Genre;
 use Gate;
 
-use Illuminate\Http\Request;
-
-class ManageDirectorsController extends Controller
+class DirectorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -66,11 +64,11 @@ class ManageDirectorsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Director  $director
+     * @param  \App\Director  $manage_director
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Director $director)
+    public function show(Director $manage_director)
     {
         if(Gate::denies('manage-all')){
             return redirect()->route('home');
@@ -78,32 +76,32 @@ class ManageDirectorsController extends Controller
 
         $genres = [];
 
-        $director->films->each(function($film) use (&$genres) {
+        $manage_director->films->each(function($film) use (&$genres) {
             $film->genres->each(function($genre) use (&$genres) {
                 $genres[] = $genre;
             });
         });
 
         return view('manageDirectors.show')
-            ->withDirector($director)
+            ->withDirector($manage_director)
             ->withDirectorsGenres($genres);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Director  $director
+     * @param  \App\Director  $manage_director
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Director $director)
+    public function edit(Director $manage_director)
     {
         if(Gate::denies('manage-all')){
             return redirect()->route('home');
         }
 
         return view('manageDirectors.edit')
-            ->withDirector($director)
+            ->withDirector($manage_director)
             ->withAllFilms(Film::all())
             ->withAllGenres(Genre::all());
     }
@@ -111,17 +109,17 @@ class ManageDirectorsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Director  $director
+     * @param  \App\Director  $$manage_director
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Director $director)
+    public function update(Director $manage_director)
     {
         if(Gate::denies('manage-all')){
             return redirect()->route('home');
         }
 
-        $director->update(request()->validate([
+        $manage_director->update(request()->validate([
             'name' => ['required'],
             'bio' => ['required'],
         ]));
