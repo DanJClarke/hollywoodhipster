@@ -1,10 +1,12 @@
 <template>
     <div class="review" >
-        <blockquote>
+        <blockquote v-if="errors">
             {{ review.content }}
             <cite>{{ userName }}</cite>
         </blockquote>
-        <hr>
+        <div v-else  class="callout warning">
+            Could not set review to user
+        </div>
     </div>
 </template>
 
@@ -28,12 +30,18 @@ export default {
     data(){
         return{
             userName: '',
+            errors: false
         }
     },
 
     mounted(){
         axios.get(`/admin/users/${this.$props.userId}`)
-        .then(response => this.userName = response.data[0].name)
+        .then(response => {
+            this.userName = response.data[0].name
+        })
+        .catch(error => {
+            this.errors = true;
+        });
     }
 }
 </script>
