@@ -26,6 +26,13 @@ class Film extends Model
     }
 
     /**
+     * Get all of the rating for the film.
+     */
+    public function rating(){
+        return $this->hasMany(Rating::class);
+    }
+
+    /**
     * The genres that belong to the film.
     */
     public function genres(){

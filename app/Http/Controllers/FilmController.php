@@ -16,7 +16,7 @@ class FilmController extends Controller
      */
     public function index()
     {
-        $allFilms = Film::with(['director','genres','reviews'])->get();
+        $allFilms = Film::with(['director','genres','reviews','rating'])->get();
 
         if($allFilms){
             return $allFilms;

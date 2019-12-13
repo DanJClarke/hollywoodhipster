@@ -23,7 +23,7 @@
             <div class="row" id="root">
                 <div class="large-12 columns">
                         <label>Rating (optional)
-                        <rating :initial-rating="{{ $userRatingReturn }}"></rating>
+                        <rating :initial-rating="{{ $userRatingReturn }}" :active="true"></rating>
                     </label>
                 </div>
             </div>

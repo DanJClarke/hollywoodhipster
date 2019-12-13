@@ -1,11 +1,16 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
-@import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue');
 
 // Foundation
 @import "node_modules/foundation-sites/assets/foundation";
+@import "node_modules/foundation-icon-fonts/foundation-icons";
+
+// Variables
+@import 'utilities/variables';
+@import 'utilities/mixins';
+
+*:focus {outline:0;}
 
 $rating-block-margin-bottom: 2rem;
 $rating-block-star-color: $alert-color;
@@ -14,51 +19,39 @@ body{
     height: 400vh;
     margin:0;
     background: $body-bg;
+    color: #fff;
+
 }
 
-.rating-block {
-  padding: 2px 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0px;
+    line-height: 1em;
 
-    .ratings-type {
-        margin-right: 1rem;
-        margin-bottom: 0;
-    }
+}
 
-    .rating-block {
-        display: flex;
-        align-items: center;
-        margin-bottom: $rating-block-margin-bottom;
-    }
+.sideline {
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+}
 
-    .rating-block-rating {
-        display: flex;
-    }
-
-    .star {
-        cursor: pointer;
-        stroke: $rating-color;
-    }
-
-    .rating-block-rating .star.selected polygon {
-        fill: $rating-color;
-    }
-
-
-
-    .rating-block-rating.is-voted .star.selected ~ .star polygon {
-        fill: transparent;
+@media (max-width: 767px){
+    .sideline {
+        text-align: center;
     }
 }
+
 
 .genre, .roles, .inline-block{
     display: inline-block;
 }
 
-.film-card img {
-    width: 100%;
+
+
+.row.flex{
+    @include flexbox();
+    @include flex-wrap(wrap);
 }
 
 .navbar{

@@ -138,7 +138,7 @@ class ManageFilmsController extends Controller
         request()->validate([
             'title'         => 'required',
             'director_id'   => 'required',
-            'imgsrc'        => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'imgsrc'        => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'running_time'  => 'required',
             'release_date'  => 'required',
             'budget'        => 'required',

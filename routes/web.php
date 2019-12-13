@@ -22,6 +22,10 @@ Route::get('/manage-my-reviews/{user}', 'MyReviewsController@show')->name('revie
 Route::get('/manage-my-reviews/{review}/edit', 'MyReviewsController@edit')->name('reviews.edit')->middleware('can:add-reviews');
 Route::patch('/manage-my-reviews/{review}', 'MyReviewsController@update')->name('reviews.update')->middleware('can:add-reviews');
 
+//======== Routes for Users to manage their Ratings ============================
+
+Route::post('/manage-rating', 'RatingController@store');
+
 
 //======== Routes for Managing Films ============================
 

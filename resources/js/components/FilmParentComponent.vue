@@ -1,6 +1,6 @@
 <template>
     <div id="filmParent">
-        <div v-if="filmList.length > 0">
+        <div class="row flex" v-if="filmList.length > 0">
             <film-card  v-for="film in filmList" :filmId="film.id" :key="film.id" :film="film"></film-card>
         </div>
         <div v-else  class="callout warning">
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import FilmCard from './filmCardComponent'
+import FilmCard from './FilmCardComponent'
 
 export default {
     components: {

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ParallaxChild from './parallaxChildComponent'
+import ParallaxChild from './ParallaxChildComponent'
 
 export default {
     components:{

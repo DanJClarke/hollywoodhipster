@@ -1,7 +1,7 @@
 <template>
     <div class="review" >
-        <blockquote v-if="errors">
-            {{ review.content }}
+        <blockquote v-if="!errors">
+            <p>{{ review.content }}</p>
             <cite>{{ userName }}</cite>
         </blockquote>
         <div v-else  class="callout warning">
@@ -45,3 +45,18 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+blockquote {
+    margin: 0 0 1rem;
+    padding: 0.5rem 1.25rem 0 1.125rem;
+    border-left: 1px solid #444;
+
+    p, cite {
+        line-height: 1.6;
+        color: #444;
+        margin-bottom: 5px;
+    }
+
+}
+</style>

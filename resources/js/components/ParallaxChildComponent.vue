@@ -45,6 +45,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
+
 .keyart_layer {
     background-position: top center;
     background-repeat: no-repeat;
