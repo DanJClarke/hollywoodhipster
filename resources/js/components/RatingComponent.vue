@@ -2,14 +2,23 @@
     <div>
         <div class="rating-block">
             <div class="rating-block-rating">
-                <star-rating v-for="index in maxValue" :rating="rating" :key="index" :index="index" :initial-form="initialForm" @setRating="updateRating" :enableClick="active"></star-rating>
+                <star-rating
+                    v-for="index in maxValue"
+                    :key="index"
+                    :rating="rating"
+                    :index="index"
+                    :initial-form="initialForm"
+                    :enableClick="active"
+                    :updateForm="updateForm"
+                ></star-rating>
             </div>
         </div>
-        <input type="hidden" name="rating" min="1" max="5" :value="rating" >
     </div>
 </template>
 
 <script>
+
+
 import StarRating from './StarComponent'
 
 export default {
@@ -18,9 +27,8 @@ export default {
     },
 
     props:{
-        initialRating:{
-            default: 0,
-            type: Number
+        rating:{
+            default: 0
         },
         active:{
             default: false,
@@ -29,24 +37,18 @@ export default {
         initialForm:{
             default: false,
             type: Boolean
+        },
+        updateForm:{
+            type: Function
         }
     },
 
     data(){
         return{
-            rating: this.initialRating,
-            maxValue: 5
-        }
-    },
-
-    methods:{
-        updateRating(value){
-            this.rating = value;
-            if(this.$props.initialForm){
-                 this.$emit('updateRating', value);
-            }
+            maxValue: 5,
         }
     }
+
 }
 </script>
 

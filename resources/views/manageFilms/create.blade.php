@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <form method="post" action="/manage-films" enctype="multipart/form-data">
+    <form id="form" method="post" action="/manage-films" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="large-4 columns">
@@ -84,5 +84,7 @@
             <a href="/manage-films">&laquo; Back to all Films</a>
         </div>
     </div>
+
+
 
 @endsection

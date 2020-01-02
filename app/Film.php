@@ -18,6 +18,8 @@ class Film extends Model
         'plot'
     ];
 
+    // protected $with = ['genres'];
+
     /**
      * Get all of the reviews for the film.
      */

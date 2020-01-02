@@ -2,7 +2,7 @@
     <div class="review-form">
         <h3>Leave a review </h3>
         <label for="rating">Rating (optional)
-            <rating @updateRating="updateRating" :initial-rating="0" :initial-form="true" :active="true"></rating>
+            <rating :updateRating="updateRating" :initial-rating="0" :rating="rating" :initial-form="true" :active="true" :updateForm="updateForm"></rating>
         </label>
         <label for="content">Review
             <textarea width="100%"  name="content" rows="5" v-model="reviewContent"></textarea>
@@ -23,6 +23,9 @@ export default {
         filmId:{
            default: null,
            type: Number
+        },
+        updateRating: {
+            type: Function
         }
     },
 
@@ -35,6 +38,10 @@ export default {
     },
 
     methods:{
+        updateForm(value){
+            this.rating = value;
+        },
+
         submitted(event){
             if(this.reviewContent !=''){
                 axios.post(`/manage-reviews`, {
@@ -68,7 +75,7 @@ export default {
                     'user_id': this.userId
 
                 }).then(response => {
-                   this.$emit('submittedRating', this.rating);
+                   this.updateRating(this.rating);
                    this.$emit('status', {
                        message: response.data,
                        hasReviewedFlag: true
@@ -83,10 +90,6 @@ export default {
                 });
             }
         },
-
-        updateRating(value){
-            this.rating = value;
-        }
     }
 }
 </script>

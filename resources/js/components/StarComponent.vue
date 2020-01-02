@@ -14,8 +14,7 @@ export default {
             type: Number
         },
         rating:{
-            default: null,
-            type: Number
+            default: null
         },
         enableClick:{
             default: false,
@@ -25,11 +24,14 @@ export default {
             default: false,
             type: Boolean
         },
+        updateForm:{
+            type: Function
+        }
     },
 
     data(){
         return{
-            initialReview: this.$props.initialReviewForm
+            initialReview: this.$props.initialForm
         }
     },
 
@@ -41,7 +43,7 @@ export default {
 
     methods:{
         setRating(){
-            this.$emit('setRating', this.index);
+            this.updateForm(this.index)
         }
     }
 }

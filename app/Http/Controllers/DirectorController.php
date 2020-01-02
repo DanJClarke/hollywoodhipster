@@ -25,6 +25,13 @@ class DirectorController extends Controller
         ->withAllFilms(Film::all())
         ->withAllDirectors(Director::all())
         ->withAllGenres(Genre::all());
+
+        // $directors = Director::with(['films'])->get();
+
+        // if($directors){
+        //     return $directors;
+        // }
+        // return response()->json('No Directors in the database!', 404);
     }
 
     /**

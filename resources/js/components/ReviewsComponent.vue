@@ -7,7 +7,7 @@
             </details>
         </div>
         <div :class="['callout', 'success' , {'warning': hasError}]" v-show="reviewStatus" v-model="reviewStatus" v-text="reviewStatus"></div>
-        <review-form :filmId="filmId" @submittedReview="updateReviews" @submittedRating="updateRating" @status="updateStatus"></review-form>
+        <review-form :filmId="filmId" @submittedReview="updateReviews" :updateRating="updateRating" @status="updateStatus"></review-form>
     </div>
 </template>
 
@@ -29,6 +29,9 @@ export default {
         initialReviews:{
            default: [],
            type: Array
+        },
+        updateRating: {
+            type: Function
         }
     },
 
@@ -50,11 +53,6 @@ export default {
                 content: this.reviewContent,
                 user_id: 2,
             });
-        },
-
-        updateRating(value){
-            this.rating = value;
-            this.$emit('updateRating',this.rating);
         },
 
         updateStatus(status){

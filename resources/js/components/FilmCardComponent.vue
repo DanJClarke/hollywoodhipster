@@ -7,7 +7,7 @@
             <div class="movie-details">
                 <header>
                     <h2>{{ film.title }}</h2>
-                    <rating v-if="rating != null" :initial-rating="rating"></rating>
+                    <rating v-if="ratings.length > 0" :rating="`${ratings | averageRating}`"></rating>
                 </header>
                 <dl class="overview">
                     <dt>Released:</dt>
@@ -24,7 +24,7 @@
                     <p>{{ film.plot }}</p>
                 </details>
             </div>
-             <reviews :filmId="filmId" :initialReviews="film.reviews" @updateRating="updateRating"></reviews>
+             <reviews :filmId="filmId" :initialReviews="film.reviews" :updateRating="updateRating"></reviews>
         </div>
 
     </div>
@@ -43,8 +43,8 @@ export default {
 
     data() {
        return{
-           ratings: [],
-           rating: null
+           ratings: this.$props.film.rating.map(({rating}) => rating) || [],
+           rating: 0
        }
     },
 
@@ -57,6 +57,15 @@ export default {
 
         Year(date){
             return moment(date).format('YYYY')
+        },
+
+
+        averageRating(ratings){
+            if(ratings.length > 0){
+                const reducer = (accumulator, currentValue) => accumulator + currentValue;
+                return Math.floor(this.ratings.reduce(reducer)/this.ratings.length);
+            }
+            return 0;
         }
     },
 
@@ -73,28 +82,16 @@ export default {
 
     methods:{
          updateRating(value){
-            this.rating = value;
-            this.ratings.push(this.rating);
+          this.rating = value;
+          this.ratings.push(value);
         }
     },
 
     computed:{
-
-        returnRatings(){
-           this.ratings = this.film.rating.map(({rating}) => rating);
+        averageRating(){
+            const reducer = (accumulator, currentValue) => accumulator + currentValue;
+            return Math.floor(this.ratings.reduce(reducer)/this.ratings.length);
         }
-
-        // averageRating(newRating){
-        //     const len = this.ratings.length;
-        //     if(len > 0){
-        //        for (let i = 0; i < len; i++) {
-        //             this.ratings.push(this.$props.film.rating[i].rating)
-        //         }
-        //         const reducer = (accumulator, currentValue) => accumulator + currentValue;
-        //         this.rating =  Math.floor(ratings.reduce(reducer)/len);
-        //     }
-        //     this.rating = null;
-        // }
     },
 }
 </script>

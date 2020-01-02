@@ -56,6 +56,8 @@ class ManageFilmsController extends Controller
             return redirect()->route('welcome');
         }
 
+        return $request->all();
+
         request()->validate([
             'title'         => 'required',
             'director_id'   => 'required',
