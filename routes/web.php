@@ -13,18 +13,43 @@
 
 Route::get('/', 'PagesController@home');
 
-Route::get('/foundation-test', 'PagesController@foundation');
+//======== Routes for Managing Reviews ============================
+Route::resource('/manage-reviews', 'FilmReviewsController');
 
-Route::delete('/reviews/{review}', 'FilmReviewsController@destroy');
+//======== Routes for Users to manage their Reviews ============================
 
-Route::resource('/films', 'FilmsController');
+Route::get('/manage-my-reviews/{user}', 'MyReviewsController@show')->name('reviews.mine');
+Route::get('/manage-my-reviews/{review}/edit', 'MyReviewsController@edit')->name('reviews.edit')->middleware('can:add-reviews');
+Route::patch('/manage-my-reviews/{review}', 'MyReviewsController@update')->name('reviews.update')->middleware('can:add-reviews');
 
-Route::resource('/directors', 'DirectorsController');
+//======== Routes for Users to manage their Ratings ============================
+
+Route::post('/manage-rating', 'RatingController@store');
+
+
+//======== Routes for Managing Films ============================
+
+Route::resource('/manage-films', 'ManageFilmsController');
+
+//======== Routes Films ============================
+
+Route::get('/film-data', 'FilmController@index')->name('films.data');
+
+//======== Routes for Managing Directors ============================
+
+Route::resource('manage-directors', 'DirectorController');
+
+//======== Routes for Authentication ============================
 
 Auth::routes();
 
+//======== Routes for Users and Admin ============================
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
-    Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
+//======== Routes for Admin ============================
+
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
+
+    Route::resource('/users', 'UsersController', ['except' => [ 'create', 'store']]);
+
 });

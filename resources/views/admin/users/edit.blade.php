@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'Edit User role')
 
@@ -11,7 +11,6 @@
                 @csrf
                 @method('PATCH')
                 <div class="row">
-
 
                     <div class="large-6 columns">
                         <label for="email">Name</label>

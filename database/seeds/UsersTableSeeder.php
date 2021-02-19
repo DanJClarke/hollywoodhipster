@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $reviewer = User::create([
-            'name' => 'Reviwer User',
+            'name' => 'Reviewer User',
             'email' => 'reviewer@reviewer.com',
             'password' => Hash::make('password')
         ]);

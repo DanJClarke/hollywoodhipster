@@ -22,7 +22,7 @@ class RatingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create( )
     {
         //
     }
@@ -35,7 +35,13 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Rating::create(request()->validate([
+            'rating' => ['required'],
+            'film_id' => ['required'],
+            'user_id' => ['required'],
+        ]));
+
+        return response()->json('rating stored!');
     }
 
     /**
